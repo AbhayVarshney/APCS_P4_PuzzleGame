@@ -1,7 +1,7 @@
 package Model;
 
 public class PGModel {
-    PGModel() {
+    public PGModel() {
 
     }
 }

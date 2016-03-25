@@ -8,7 +8,7 @@ public class PGController {
     PGModel model;
 
     public PGController() { // default constructor
-//        view = PGView(this);
-//        model = PGModel();
+        view = new PGView(this);
+        model = new PGModel();
     }
 }

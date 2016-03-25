@@ -28,7 +28,7 @@ public class PGView extends JFrame {
     private LeftComponents leftComponents;
 
     // Default constructor
-    PGView(PGController controller) {
+    public PGView(PGController controller) {
         this.controller = controller;
 
         WINDOW_WIDTH = 450;
