@@ -1,7 +1,10 @@
+package View;
+
+import Controller.PGController;
 import javax.swing.*;
 import java.awt.*;
 
-public class PGView extends JFrame{ // creating window
+public class PGView extends JFrame {
     public PGController controller;
 
     /** MENUBAR **/
