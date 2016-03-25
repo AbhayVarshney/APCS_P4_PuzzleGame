@@ -4,7 +4,5 @@ public class PGController {
     PGView view;
     // constructor
     PGController() {
-        //mode = PGModel();
-        //view = PGView(this);
     }
 }
