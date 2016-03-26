@@ -27,6 +27,6 @@ public class PGModel {
     }
 
     void createBoard() {
-
+        boardBackground = new char[18][10];
     }
 }
