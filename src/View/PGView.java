@@ -107,3 +107,21 @@ class Sprite {
 class LeftComponents {
 
 }
+
+
+/**
+ * BufferedImage crate, wall, victory_tile, sprite;
+     public PGController() { // default constructor
+     view = new PGView(this);
+     model = new PGModel();
+     try{
+     crate = ImageIO.read(new File("crate_tile.gif"));
+     wall = ImageIO.read(new File("gray_tile.gif"));
+     victory_tile = ImageIO.read(new File("victory_tile.gif"));
+     sprite = ImageIO.read(new File("Sprite.gif"));
+
+     }catch (IOException e) {
+     e.printStackTrace();
+     }
+     }
+ **/
