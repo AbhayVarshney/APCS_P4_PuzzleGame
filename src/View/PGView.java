@@ -4,6 +4,8 @@ import Controller.PGController;
 import javax.swing.*;
 import java.awt.*;
 
+// hello. how are you...
+
 public class PGView extends JFrame {
     public PGController controller;
 
