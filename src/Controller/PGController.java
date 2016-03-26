@@ -2,9 +2,7 @@ package Controller;
 
 import Model.PGModel;
 import View.PGView;
-
 import java.util.Timer;
-
 public class PGController {
     PGView view;
     PGModel model;
