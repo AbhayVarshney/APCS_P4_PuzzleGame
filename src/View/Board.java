@@ -10,10 +10,12 @@ import java.awt.*;
  * Reflection:
  */
 public class Board extends JPanel {
+    PGView view;
 
-    Board(PGView) {
-        
+    Board(PGView view) {
+        this.view = view;
     }
+
     @Override
     public void paintComponent(Graphics g) {
 
