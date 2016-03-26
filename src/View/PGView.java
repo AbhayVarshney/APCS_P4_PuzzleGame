@@ -1,10 +1,13 @@
 package View;
 
 import Controller.PGController;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-
-// hello. how are you...
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class PGView extends JFrame {
     public PGController controller;
@@ -25,6 +28,13 @@ public class PGView extends JFrame {
     private final int WINDOW_WIDTH;
     private final int WINDOW_HEIGHT;
 
+    /** IMAGES **/
+    BufferedImage crate;
+    BufferedImage wall;
+    BufferedImage victory_tile;
+    BufferedImage userSprite;
+
+    /** OBJECTS **/
     private Board board;
     private Sprite sprite;
     private LeftComponents leftComponents;
@@ -32,10 +42,17 @@ public class PGView extends JFrame {
     // Default constructor
     public PGView(PGController controller) {
         this.controller = controller;
-
         WINDOW_WIDTH = 450;
         WINDOW_HEIGHT = 600;
 
+        makeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
+        loadMenuBar();
+        loadImages();
+        createGui();
+        this.setVisible(true);
+    }
+
+    void makeWindow(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2);
         int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2);
@@ -44,10 +61,7 @@ public class PGView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-
-        loadMenuBar();
-        createGui();
-        this.setVisible(true);
+        this.setBackground(new Color(59,59,59)); // set background of the ui to grey
     }
 
     void loadMenuBar() {
@@ -90,20 +104,24 @@ public class PGView extends JFrame {
         contentPane.setPreferredSize(new Dimension(100,100));
     }
 
-    void createGui() {
-
+    void loadImages() {
+        try  {
+            crate = ImageIO.read(new File("images/crate_tile.gif"));
+            wall = ImageIO.read(new File("images/gray_tile.gif"));
+            victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
+            userSprite = ImageIO.read(new File("images/Sprite.gif"));
+            victory_tile = ImageIO.read(new File("images/logo.png"));
+        } catch (IOException e) {
+            System.out.println("Images can't be found. " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-}
+    void createGui() {
+        board = new Board(this);
+        sprite = new Sprite();
+        leftComponents = new LeftComponents();
 
-class Board {
-
-}
-
-class Sprite {
-
-}
-
-class LeftComponents {
+    }
 
 }
