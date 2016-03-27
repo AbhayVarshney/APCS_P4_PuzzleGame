@@ -5,10 +5,10 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
 
 import javax.imageio.ImageIO;
 
-import com.sun.glass.ui.Timer;
 
 import Model.PGModel;
 import View.PGView;

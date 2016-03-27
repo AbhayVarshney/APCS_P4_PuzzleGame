@@ -28,7 +28,7 @@ public class Board extends JPanel {
                 } else if(view.boardContent[i][j] == view.controller.model.SPRITE) {
                     g.drawImage(view.userSprite, cellSize*j, cellSize*i, cellSize, cellSize, null);
                 } else if(view.boardContent[i][j] == view.controller.model.EMPTY) {
-                    g.setColor(new Color(46,46,46));
+                    g.setColor(new Color(42,42,42));
                     g.fillRect(cellSize*j, cellSize*i, cellSize, cellSize);
                 } else if(view.boardContent[i][j] == view.controller.model.VICTORY_TILE) {
                     g.drawImage(view.victory_tile, cellSize*j, cellSize*i, cellSize, cellSize, null);
