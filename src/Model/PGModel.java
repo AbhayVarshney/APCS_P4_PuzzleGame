@@ -2,17 +2,16 @@ package Model;
 
 public class PGModel {
     char[][] boardBackground;   /** BEHIND THE SCENE BOARD **/
-    char[][] boardShow;         /** WHAT THE USER WILL SEE **/
 
     boolean gameOver;
     int boardSize, cellSize;
 
-    final char BLOCK;
-    final char CRATE;
-    final char SPRITE;
-    final char EMPTY;
-    final char VICTORY_TILE;
-    final char BACKDROP;
+    public final char BLOCK;
+    public final char CRATE;
+    public final char SPRITE;
+    public final char EMPTY;
+    public final char VICTORY_TILE;
+    public final char BACKDROP;
 
     int[] x = {-1, -1, -1, 1, 1,  1, 0,  0};
     int[] y = { 0, -1,  1, 1, 0, -1, 1, -1};
@@ -21,9 +20,9 @@ public class PGModel {
         BLOCK = 'b';         // gray.tile.gif
         CRATE = 'c';         // crate_tile.gif
         SPRITE = 's';        // Sprite.gif
-        EMPTY = ' ';         // draw grey
+        EMPTY = ' ';         // draw grey tile
         VICTORY_TILE = '.';  // victor_tile.gif
-        BACKDROP = '-';      // GREY
+        BACKDROP = 'o';      // dark grey background
     }
 
     void createBoard() {

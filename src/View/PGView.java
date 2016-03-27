@@ -12,9 +12,7 @@ import java.io.IOException;
 public class PGView extends JFrame {
     public PGController controller;
 
-    /**
-     * MENUBAR
-     **/
+    /** MENUBAR **/
     private JPanel contentPane;
     private JMenuBar menuBar;
     private JMenuItem mntmHowToPlay;
@@ -23,40 +21,51 @@ public class PGView extends JFrame {
     private JMenuItem mntmHighScore;
     private JMenuItem mntmExit;
     private JMenu mnOption;
-    private JMenuItem mntmGameType;
+    private JMenuItem mntmLevel1;
+    private JMenuItem mntmLevel2;
+    private JMenuItem mntmLevel3;
+    private JMenuItem mntmLevel4;
+    private JMenuItem mntmLevel5;
     private JMenu mnHelp;
 
-    /**
-     * WINDOW
-     **/
+    /** WINDOW **/
     private final int WINDOW_WIDTH;
     private final int WINDOW_HEIGHT;
 
-    /**
-     * IMAGES
-     **/
-    BufferedImage crate;
-    BufferedImage wall;
-    BufferedImage victory_tile;
-    BufferedImage userSprite;
+    /** IMAGES **/
+    public BufferedImage crate;
+    public BufferedImage wall;
+    public BufferedImage victory_tile;
+    public BufferedImage userSprite;
+    private int cellSize;
 
-    /**
-     * OBJECTS
-     **/
+    /** OBJECTS **/
     private Board board;
     private Sprite sprite;
     private LeftComponents leftComponents;
 
+    /** BOARD IMPORTANT **/
+    public char[][] boardContent;
+
     // Default constructor
-    public PGView(PGController controller) {
+    public PGView(char[][] board, PGController controller) {
         this.controller = controller;
+        this.boardContent = new char[board.length][board[0].length];
         WINDOW_WIDTH = 450;
         WINDOW_HEIGHT = 600;
+        cellSize = 35;
+
+        // COPYING/UPDATING BOARD CONTENT
+        for (int i = 0; i < boardContent.length; i++) {
+            for (int j = 0; j < boardContent[0].length; j++) {
+                boardContent[i][j] = board[i][j];
+            }
+        }
 
         makeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
         loadMenuBar();
         loadImages();
-        //createGui();
+        createGui();
         this.setVisible(true);
     }
 
@@ -87,11 +96,23 @@ public class PGView extends JFrame {
         mntmExit = new JMenuItem("Exit");
         mnGame.add(mntmExit);
 
-        mnOption = new JMenu("Option");
+        mnOption = new JMenu("Level");
         menuBar.add(mnOption);
 
-        mntmGameType = new JMenuItem("Game Type");
-        mnOption.add(mntmGameType);
+        mntmLevel1 = new JMenuItem("Level 1");
+        mnOption.add(mntmLevel1);
+
+        mntmLevel2 = new JMenuItem("Level 2");
+        mnOption.add(mntmLevel1);
+
+        mntmLevel3 = new JMenuItem("Level 3");
+        mnOption.add(mntmLevel1);
+
+        mntmLevel4 = new JMenuItem("Level 4");
+        mnOption.add(mntmLevel1);
+
+        mntmLevel5 = new JMenuItem("Level 5");
+        mnOption.add(mntmLevel1);
 
         mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);
@@ -126,12 +147,25 @@ public class PGView extends JFrame {
     }
 
     void createGui() {
-        //board = new Board(this);
+        board = new Board(this, cellSize);
         sprite = new Sprite();
         leftComponents = new LeftComponents();
     }
 
-    void updateBoard() {
+    void newLevelPrompter() {
+        String wonGameMessage = "Looks like you want to skip to the next level!";
+        JOptionPane wonGame = new JOptionPane();
+        wonGame.showInternalMessageDialog(this.getContentPane(), wonGameMessage, "Next level!",
+                JOptionPane.WARNING_MESSAGE, null);
+    }
+
+    void gameWonDialog() {
+        String wonGameMessage = "Congrats! You beat the game!\n Would you like to play again?";
+        JOptionPane wonGame = new JOptionPane();
+        int response = wonGame.showInternalConfirmDialog(this.getContentPane(), wonGameMessage, "You win!",
+                JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+        if(response == 0) controller.userLevel++; // move to the next level!
+        else this.dispose();           // quit
 
     }
 }
