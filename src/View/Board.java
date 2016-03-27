@@ -7,7 +7,6 @@ public class Board extends JPanel {
     PGView view;
 
     /** BOARD **/
-    int boardSize;
     int cellSize;
 
     Board(PGView view, int cellSize) {
@@ -29,13 +28,13 @@ public class Board extends JPanel {
                 } else if(view.boardContent[i][j] == view.controller.model.SPRITE) {
                     g.drawImage(view.userSprite, cellSize*j, cellSize*i, cellSize, cellSize, null);
                 } else if(view.boardContent[i][j] == view.controller.model.EMPTY) {
-                    g2.setColor(new Color(46,46,46));
-                    g2.drawRect(cellSize*j, cellSize*i, cellSize, cellSize);
+                    g.setColor(new Color(46,46,46));
+                    g.fillRect(cellSize*j, cellSize*i, cellSize, cellSize);
                 } else if(view.boardContent[i][j] == view.controller.model.VICTORY_TILE) {
                     g.drawImage(view.victory_tile, cellSize*j, cellSize*i, cellSize, cellSize, null);
                 } else { // backdrop
-                    g2.setColor(new Color(59,59,59));
-                    g2.drawRect(cellSize*j, cellSize*i, cellSize, cellSize);
+                    g.setColor(new Color(59,59,59));
+                    g.fillRect(cellSize*j, cellSize*i, cellSize, cellSize);
                 }
                 g2.setColor(Color.BLACK);
             }

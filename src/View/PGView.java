@@ -51,7 +51,7 @@ public class PGView extends JFrame {
     public PGView(char[][] board, PGController controller) {
         this.controller = controller;
         this.boardContent = new char[board.length][board[0].length];
-        WINDOW_WIDTH = 450;
+        WINDOW_WIDTH = 850;
         WINDOW_HEIGHT = 600;
         cellSize = 35;
 
@@ -139,7 +139,6 @@ public class PGView extends JFrame {
             wall = ImageIO.read(new File("images/gray_tile.gif"));
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));
-            victory_tile = ImageIO.read(new File("images/logo.png"));
         } catch (IOException e) {
             System.out.println("Images can't be found. " + e.getMessage());
             e.printStackTrace();
@@ -148,6 +147,8 @@ public class PGView extends JFrame {
 
     void createGui() {
         board = new Board(this, cellSize);
+        board.setPreferredSize(new Dimension(700, 400));
+        contentPane.add(board);
         sprite = new Sprite();
         leftComponents = new LeftComponents();
     }
