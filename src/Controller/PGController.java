@@ -24,10 +24,10 @@ public class PGController {
         view = new PGView(this);
         model = new PGModel();
         try{
-        	crate = ImageIO.read(new File("crate_tile.gif"));
-        	wall = ImageIO.read(new File("gray_tile.gif"));
-        	victory_tile = ImageIO.read(new File("victory_tile.gif"));
-        	sprite = ImageIO.read(new File("Sprite.gif"));
+        	crate = ImageIO.read(new File("images/crate_tile.gif"));
+        	wall = ImageIO.read(new File("images/gray_tile.gif"));
+        	victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
+        	sprite = ImageIO.read(new File("images/Sprite.gif"));
         	
         }catch (IOException e) {
             e.printStackTrace();
