@@ -40,9 +40,9 @@ public class PGView extends JFrame {
     private int cellSize;
 
     /** OBJECTS **/
-    private Board board;
-    private Sprite sprite;
-    private LeftComponents leftComponents;
+    public Board board;
+    public Sprite sprite;
+    public LeftComponents leftComponents;
 
     /** BOARD IMPORTANT **/
     public char[][] boardContent;
@@ -55,12 +55,7 @@ public class PGView extends JFrame {
         WINDOW_HEIGHT = 600;
         cellSize = 35;
 
-        // COPYING/UPDATING BOARD CONTENT
-        for (int i = 0; i < boardContent.length; i++) {
-            for (int j = 0; j < boardContent[0].length; j++) {
-                boardContent[i][j] = board[i][j];
-            }
-        }
+        updateBoardContent(board);
 
         makeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
         loadMenuBar();
@@ -69,7 +64,7 @@ public class PGView extends JFrame {
         this.setVisible(true);
     }
 
-    void makeWindow(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
+    private void makeWindow(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2);
         int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2);
@@ -81,7 +76,7 @@ public class PGView extends JFrame {
         this.getContentPane().setBackground(new Color(59,59,59)); // set background of the ui to grey
     }
 
-    void loadMenuBar() {
+    private void loadMenuBar() {
         menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
         JMenu mnGame = new JMenu("Game");
@@ -103,16 +98,16 @@ public class PGView extends JFrame {
         mnOption.add(mntmLevel1);
 
         mntmLevel2 = new JMenuItem("Level 2");
-        mnOption.add(mntmLevel1);
+        mnOption.add(mntmLevel2);
 
         mntmLevel3 = new JMenuItem("Level 3");
-        mnOption.add(mntmLevel1);
+        mnOption.add(mntmLevel3);
 
         mntmLevel4 = new JMenuItem("Level 4");
-        mnOption.add(mntmLevel1);
+        mnOption.add(mntmLevel4);
 
         mntmLevel5 = new JMenuItem("Level 5");
-        mnOption.add(mntmLevel1);
+        mnOption.add(mntmLevel5);
 
         mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);
@@ -133,7 +128,7 @@ public class PGView extends JFrame {
         contentPane.setPreferredSize(new Dimension(100, 100));
     }
 
-    void loadImages() {
+    private void loadImages() {
         try {
             crate = ImageIO.read(new File("images/crate_tile.gif"));
             wall = ImageIO.read(new File("images/gray_tile.gif"));
@@ -145,7 +140,7 @@ public class PGView extends JFrame {
         }
     }
 
-    void createGui() {
+    private void createGui() {
         board = new Board(this, cellSize);
         board.setPreferredSize(new Dimension(700, 400));
         contentPane.add(board);
@@ -153,14 +148,14 @@ public class PGView extends JFrame {
         leftComponents = new LeftComponents();
     }
 
-    void newLevelPrompter() {
+    public void newLevelPrompter() {
         String wonGameMessage = "Looks like you want to skip to the next level!";
         JOptionPane wonGame = new JOptionPane();
         wonGame.showInternalMessageDialog(this.getContentPane(), wonGameMessage, "Next level!",
                 JOptionPane.WARNING_MESSAGE, null);
     }
 
-    void gameWonDialog() {
+    public void gameWonDialog() {
         String wonGameMessage = "Congrats! You beat the game!\n Would you like to play again?";
         JOptionPane wonGame = new JOptionPane();
         int response = wonGame.showInternalConfirmDialog(this.getContentPane(), wonGameMessage, "You win!",
@@ -168,5 +163,14 @@ public class PGView extends JFrame {
         if(response == 0) controller.userLevel++; // move to the next level!
         else this.dispose();           // quit
 
+    }
+
+    public void updateBoardContent(char[][] board) {
+        // COPYING/UPDATING BOARD CONTENT
+        for (int i = 0; i < boardContent.length; i++) {
+            for (int j = 0; j < boardContent[0].length; j++) {
+                boardContent[i][j] = board[i][j];
+            }
+        }
     }
 }
