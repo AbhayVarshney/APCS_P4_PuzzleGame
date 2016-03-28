@@ -12,6 +12,7 @@ public class PGController {
     public PGView view;
     public PGModel model;
     public MyKeyListener keyListener;
+    public MouseListener mouse;
 
     /** TIMER **/
     Timer time;
@@ -29,6 +30,13 @@ public class PGController {
     public char[][] boardContent;
     public int flagCounter;
 
+    /** LEVELS **/
+    public final String LEVEL_1;
+    public final String LEVEL_2;
+    public final String LEVEL_3;
+    public final String LEVEL_4;
+    public final String LEVEL_5;
+
     public PGController() {
         flagCounter = 0;
         userLevel = 1;
@@ -37,11 +45,19 @@ public class PGController {
         BOARDWIDTH = 11;
         BOARDHEIGHT = 19;
 
-        setGameType("src/Controller/Levels/Level1_Sokoban.txt");
+        /** INTIIALIZING LEVELS **/
+        LEVEL_1 = "src/Controller/Levels/Level1_Sokoban.txt";
+        LEVEL_2 = "src/Controller/Levels/Level2_Sokoban.txt";
+        LEVEL_3 = "src/Controller/Levels/Level3_Sokoban.txt";
+        LEVEL_4 = "src/Controller/Levels/Level4_Sokoban.txt";
+        LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
+
+        setGameType(LEVEL_1);
         model = new PGModel();
         view = new PGView(readFile(), this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
+        mouse = new MouseListener(this);
     }
 
     char[][] readFile() {
@@ -131,15 +147,6 @@ public class PGController {
         view.updateBoardContent(boardContent);
         view.board.repaint();
     }
-
-
-
-
-
-
-
-
-
 
 //    void start() {
 //        switch (gameType) {
