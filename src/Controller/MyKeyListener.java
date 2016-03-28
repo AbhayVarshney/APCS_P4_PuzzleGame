@@ -42,23 +42,38 @@ public class MyKeyListener extends KeyAdapter {
         } else if(controller.getContent(newMyX, newMyY) == controller.model.CRATE &&
                  (controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.EMPTY ||
                   controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.VICTORY_TILE)) {
-
-            if()
-
-
-            if(isVictory) {
-                controller.setContent(myX, myY, controller.model.VICTORY_TILE);
+            if(controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.VICTORY_TILE) {
+                // user has successfully dragged crate to the desired position
+                controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.COMPLETED_CRATE);
             } else {
-                isVictory = true;
-                controller.setContent(myX, myY, controller.model.EMPTY);
+                controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
             }
             // push box
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
-            controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
         }
+
+        updateVictoryCrates();
+
+        /** NEED TO FIX IF CRATE IS IN THE VICTORY TILE**/
         //controller.printBoard();
         controller.repaintBoard(); // update the board
+
+    }
+
+    void updateVictoryCrates() {
+        int counter = 0;
+        for (int i = 0; i < controller.boardContent.length; i++) {
+            for (int j = 0; j < controller.boardContent[0].length; j++) {
+                if(controller.boardContent[i][j] == controller.model.COMPLETED_CRATE) {
+                    counter++;
+                }
+            }
+        }
+        if(counter == 6) {
+            // user has beat the level
+            // move to the next level
+        }
 
     }
 }

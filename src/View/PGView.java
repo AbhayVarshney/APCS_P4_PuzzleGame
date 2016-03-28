@@ -34,6 +34,7 @@ public class PGView extends JFrame {
 
     /** IMAGES **/
     public BufferedImage crate;
+    public BufferedImage completedCrate;
     public BufferedImage wall;
     public BufferedImage victory_tile;
     public BufferedImage userSprite;
@@ -131,6 +132,7 @@ public class PGView extends JFrame {
     private void loadImages() {
         try {
             crate = ImageIO.read(new File("images/crate_tile.gif"));
+            completedCrate = ImageIO.read(new File("images/completed_crate.gif"));
             wall = ImageIO.read(new File("images/gray_tile.gif"));
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));

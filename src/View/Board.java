@@ -33,6 +33,8 @@ public class Board extends JPanel {
                     g.fillRect(cellSize*j, cellSize*i, cellSize, cellSize);
                 } else if(view.boardContent[i][j] == view.controller.model.VICTORY_TILE) {
                     g.drawImage(view.victory_tile, cellSize*j, cellSize*i, cellSize, cellSize, null);
+                } else if(view.boardContent[i][j] == view.controller.model.COMPLETED_CRATE) {
+                    g.drawImage(view.completedCrate, cellSize*j, cellSize*i, cellSize, cellSize, null);
                 } else { // backdrop
                     g.setColor(new Color(59,59,59));
                     g.fillRect(cellSize*j, cellSize*i, cellSize, cellSize);

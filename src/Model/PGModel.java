@@ -8,6 +8,7 @@ public class PGModel {
 
     public final char BLOCK;
     public final char CRATE;
+    public final char COMPLETED_CRATE;
     public final char SPRITE;
     public final char EMPTY;
     public final char VICTORY_TILE;
@@ -19,6 +20,7 @@ public class PGModel {
     public PGModel() {
         BLOCK = 'b';         // gray.tile.gif
         CRATE = 'c';         // crate_tile.gif
+        COMPLETED_CRATE = 'x'; //completed_crate.gif
         SPRITE = 's';        // Sprite.gif
         EMPTY = ' ';         // draw grey tile
         VICTORY_TILE = '.';  // victor_tile.gif
