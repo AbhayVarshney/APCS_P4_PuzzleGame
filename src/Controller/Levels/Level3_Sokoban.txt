@@ -1,0 +1,11 @@
+rock.png rock.png rock.png rock.png rock.png rock.png null null rock.png rock.png rock.png null null null null null null null null 
+rock.png tree_big.png tree_big.png null null rock.png null rock.png rock.png tree_cave_b1.png rock.png rock.png null null null null null null null 
+rock.png tree_big.png tree_big.png null null rock.png rock.png rock.png null null null rock.png null null null null null null null 
+rock.png tree_big.png tree_big.png null null null null null tree.png tree.png null rock.png null null null null null null null 
+rock.png tree_big.png tree_big.png null null rock.png null rock.png null tree.png null rock.png null null null null null null null 
+rock.png tree_big.png tree_big.png rock.png rock.png rock.png null rock.png null tree.png null rock.png null null null null null null null 
+rock.png rock.png rock.png rock.png null tree.png null rock.png tree.png null null rock.png null null null null null null null 
+null null null rock.png null null tree.png rock.png null tree.png null rock.png null null null null null null null 
+null null null rock.png null tree.png null null tree.png null null rock.png null null null null null null null 
+null null null rock.png null null rock.png rock.png null null null rock.png null null null null null null null 
+null null null rock.png rock.png rock.png rock.png rock.png rock.png rock.png rock.png rock.png null null null null null null null 
