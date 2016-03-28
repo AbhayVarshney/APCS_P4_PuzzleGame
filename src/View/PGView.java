@@ -13,20 +13,20 @@ public class PGView extends JFrame {
     public PGController controller;
 
     /** MENUBAR **/
-    private JPanel contentPane;
-    private JMenuBar menuBar;
-    private JMenuItem mntmHowToPlay;
-    private JMenuItem mntmAbout;
-    private JMenuItem mntmNewGame;
-    private JMenuItem mntmHighScore;
-    private JMenuItem mntmExit;
-    private JMenu mnOption;
-    private JMenuItem mntmLevel1;
-    private JMenuItem mntmLevel2;
-    private JMenuItem mntmLevel3;
-    private JMenuItem mntmLevel4;
-    private JMenuItem mntmLevel5;
-    private JMenu mnHelp;
+    public JPanel contentPane;
+    public JMenuBar menuBar;
+    public JMenuItem mntmHowToPlay;
+    public JMenuItem mntmAbout;
+    public JMenuItem mntmNewGame;
+    public JMenuItem mntmHighScore;
+    public JMenuItem mntmExit;
+    public JMenu mnOption;
+    public JMenuItem mntmLevel1;
+    public JMenuItem mntmLevel2;
+    public JMenuItem mntmLevel3;
+    public JMenuItem mntmLevel4;
+    public JMenuItem mntmLevel5;
+    public JMenu mnHelp;
 
     /** WINDOW **/
     private final int WINDOW_WIDTH;
@@ -49,6 +49,11 @@ public class PGView extends JFrame {
     public char[][] boardContent;
 
     // Default constructor
+    public PGView() {
+        WINDOW_WIDTH = 850;
+        WINDOW_HEIGHT = 600;
+    }
+
     public PGView(char[][] board, PGController controller) {
         this.controller = controller;
         this.boardContent = new char[board.length][board[0].length];

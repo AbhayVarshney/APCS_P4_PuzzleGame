@@ -1,5 +1,7 @@
 package Controller;
 
+import View.PGView;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -73,6 +75,7 @@ public class MyKeyListener extends KeyAdapter {
         if(counter == 6) {
             // user has beat the level
             // move to the next level
+            new PGView().gameWonDialog();
         }
 
     }
