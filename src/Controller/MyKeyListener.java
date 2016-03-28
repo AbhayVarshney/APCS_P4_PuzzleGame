@@ -5,8 +5,10 @@ import java.awt.event.KeyEvent;
 
 public class MyKeyListener extends KeyAdapter {
     PGController controller;
+    boolean isVictory;
     MyKeyListener(PGController controller) {
         this.controller = controller;
+        isVictory = false;
     }
 
     @Override
@@ -22,13 +24,40 @@ public class MyKeyListener extends KeyAdapter {
         else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; }
 
         if(controller.getContent(newMyX, newMyY) == controller.model.EMPTY) { // safe to move
+            if(!isVictory) {
+                controller.setContent(myX, myY, controller.model.EMPTY);
+            } else {
+                controller.setContent(myX, myY, controller.model.VICTORY_TILE);
+            }
+            controller.setContent(newMyX, newMyY, controller.model.SPRITE);
+            isVictory = false;
+        } else if(controller.getContent(newMyX, newMyY) == controller.model.VICTORY_TILE) {
+            if(isVictory) {
+                controller.setContent(myX, myY, controller.model.VICTORY_TILE);
+            } else {
+                isVictory = true;
+                controller.setContent(myX, myY, controller.model.EMPTY);
+            }
+            controller.setContent(newMyX, newMyY, controller.model.SPRITE);
+        } else if(controller.getContent(newMyX, newMyY) == controller.model.CRATE &&
+                 (controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.EMPTY ||
+                  controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.VICTORY_TILE)) {
+
+            if()
+
+
+            if(isVictory) {
+                controller.setContent(myX, myY, controller.model.VICTORY_TILE);
+            } else {
+                isVictory = true;
+                controller.setContent(myX, myY, controller.model.EMPTY);
+            }
+            // push box
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
+            controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
         }
-//        else if(controller.getContent(newMyX, newMyY) == controller.model.CRATE) { // push box
-//
-//        }
-        controller.printBoard();
+        //controller.printBoard();
         controller.repaintBoard(); // update the board
 
     }

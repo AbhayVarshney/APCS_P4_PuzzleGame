@@ -18,6 +18,7 @@ public class Board extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        setBackground(new Color(59,59,59));
 
         for (int i = 0; i < view.boardContent.length; i++) {
             for (int j = 0; j < view.boardContent[0].length; j++) {

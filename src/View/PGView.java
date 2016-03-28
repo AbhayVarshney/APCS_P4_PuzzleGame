@@ -61,6 +61,7 @@ public class PGView extends JFrame {
         loadMenuBar();
         loadImages();
         createGui();
+        this.getContentPane().setBackground(new Color(59,59,59)); // set background of the ui to grey
         this.setVisible(true);
     }
 
@@ -73,7 +74,6 @@ public class PGView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        this.getContentPane().setBackground(new Color(59,59,59)); // set background of the ui to grey
     }
 
     private void loadMenuBar() {
