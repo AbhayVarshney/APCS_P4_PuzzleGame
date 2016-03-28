@@ -31,7 +31,7 @@ public class Board extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         setBackground(new Color(59,59,59));
-
+        //g2.drawImage(view.logo, 100, 50, 100, 50, sx1, sy1, sx2, sy2, observer)
         for (int i = 0; i < view.boardContent.length; i++) {
             for (int j = 0; j < view.boardContent[0].length; j++) {
                 if(view.boardContent[i][j] == view.controller.model.BLOCK) {
@@ -54,6 +54,7 @@ public class Board extends JPanel {
                 g2.setColor(Color.BLACK);
             }
         }
+        
     }
 }
 

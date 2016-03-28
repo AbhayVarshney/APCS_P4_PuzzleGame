@@ -19,11 +19,13 @@ public class MouseListener extends MouseAdapter implements ActionListener {
 
         } else if(e.getSource() == controller.view.mntmExit) { // user wants to exit the game
             controller.view.dispose();
-        } else if(e.getSource() == controller.view.mnHelp) { // help
+        } else if(e.getSource() == controller.view.mntmHowToPlay) { // help
+        	System.out.println("How to play");
             try {
                 JEditorPane helpContent = new JEditorPane(new URL("file:Html/Sokoban_HowToPlay.html"));
                 JScrollPane helpPane = new JScrollPane(helpContent);
                 helpPane.setPreferredSize(new Dimension(700,400));
+                JOptionPane.showMessageDialog(null, helpPane, "How To Play", JOptionPane.PLAIN_MESSAGE, null);
             } catch(MalformedURLException a) {
                 System.out.println("file not found! " + a.getMessage());
                 a.getStackTrace();
