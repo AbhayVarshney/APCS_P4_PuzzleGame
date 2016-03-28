@@ -9,11 +9,23 @@ public class Board extends JPanel {
     /** BOARD **/
     int cellSize;
 
+    /** 2d array w/ positions of victory tile**/
+    CoordinatePoint[] victoryTilesPositions;
+
     Board(PGView view, int cellSize) {
         this.view = view;
         this.cellSize = cellSize;
-    }
+        victoryTilesPositions = new CoordinatePoint[5];
 
+        for (int i = 0; i < view.boardContent.length; i++) {
+            for (int j = 0; j < view.boardContent[0].length; j++) {
+                if(view.boardContent[i][j] == view.controller.model.VICTORY_TILE) {
+
+                }
+            }
+        }
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -43,4 +55,8 @@ public class Board extends JPanel {
             }
         }
     }
+}
+
+class CoordinatePoint {
+
 }
