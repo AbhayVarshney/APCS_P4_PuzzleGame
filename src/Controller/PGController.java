@@ -58,6 +58,7 @@ public class PGController {
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
         mouse = new MouseListener(this);
+        addListeners();
     }
 
     char[][] readFile() {
@@ -105,6 +106,19 @@ public class PGController {
         }
 
         System.out.println();
+    }
+
+    void addListeners() {
+        view.mntmAbout.addActionListener(mouse);
+        view.mntmHowToPlay.addActionListener(mouse);
+        view.mntmNewGame.addActionListener(mouse);
+        view.mntmHighScore.addActionListener(mouse);
+        view.mntmExit.addActionListener(mouse);
+        view.mntmLevel1.addActionListener(mouse);
+        view.mntmLevel2.addActionListener(mouse);
+        view.mntmLevel3.addActionListener(mouse);
+        view.mntmLevel4.addActionListener(mouse);
+        view.mntmLevel5.addActionListener(mouse);
     }
 
     // setter method
