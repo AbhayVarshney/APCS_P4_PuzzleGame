@@ -7,10 +7,10 @@ import java.awt.event.KeyEvent;
 
 public class MyKeyListener extends KeyAdapter {
     PGController controller;
-    boolean isVictory;
+    int crateCounter;
+
     MyKeyListener(PGController controller) {
         this.controller = controller;
-        isVictory = false;
     }
 
     @Override
@@ -25,32 +25,17 @@ public class MyKeyListener extends KeyAdapter {
         else if (e.getKeyCode() == KeyEvent.VK_UP )   { newMyX--; }
         else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; }
 
-        if(controller.getContent(newMyX, newMyY) == controller.model.EMPTY) { // safe to move
-            if(!isVictory) {
-                controller.setContent(myX, myY, controller.model.EMPTY);
-            } else {
-                controller.setContent(myX, myY, controller.model.VICTORY_TILE);
-            }
+        if(isEmpty(newMyX, newMyY)) { // safe to move
+            controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
-            isVictory = false;
-        } else if(controller.getContent(newMyX, newMyY) == controller.model.VICTORY_TILE) {
-            if(isVictory) {
-                controller.setContent(myX, myY, controller.model.VICTORY_TILE);
-            } else {
-                isVictory = true;
-                controller.setContent(myX, myY, controller.model.EMPTY);
-            }
+        } else if(isVictory(newMyX, newMyY)) {
+            controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
-        } else if(controller.getContent(newMyX, newMyY) == controller.model.CRATE &&
-                 (controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.EMPTY ||
-                  controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.VICTORY_TILE)) {
-            if(controller.getContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) == controller.model.VICTORY_TILE) {
-                // user has successfully dragged crate to the desired position
-                controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.COMPLETED_CRATE);
-            } else {
-                controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
-            }
-            // push box
+        } else if((isCrate(newMyX, newMyY) || isCompletedCrate(newMyX, newMyY)) &&
+                  (isEmpty(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) ||
+                   isVictory(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) ||
+                   isCompletedCrate(newMyX + (newMyX - myX), newMyY + (newMyY - myY)))) {
+            controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         }
@@ -63,16 +48,35 @@ public class MyKeyListener extends KeyAdapter {
 
     }
 
+    private boolean isVictory(int posX, int posY) {
+        return controller.getContent(posX, posY) == controller.model.VICTORY_TILE;
+    }
+
+    private boolean isEmpty(int posX, int posY) {
+        return controller.getContent(posX, posY) == controller.model.EMPTY;
+    }
+
+    private boolean isCrate(int posX, int posY) {
+        return controller.getContent(posX, posY) == controller.model.CRATE;
+    }
+
+    private boolean isCompletedCrate(int posX, int posY) {
+        return controller.getContent(posX, posY) == controller.model.COMPLETED_CRATE;
+    }
+
+
     void updateVictoryCrates() {
-        int counter = 0;
+        controller.printBoard();
+        crateCounter = 0;
+        System.out.println("counter - " + crateCounter);
         for (int i = 0; i < controller.boardContent.length; i++) {
             for (int j = 0; j < controller.boardContent[0].length; j++) {
                 if(controller.boardContent[i][j] == controller.model.COMPLETED_CRATE) {
-                    counter++;
+                    crateCounter++;
                 }
             }
         }
-        if(counter == 6) {
+        if(crateCounter == 6) {
             // user has beat the level
             // move to the next level
             new PGView().gameWonDialog();
