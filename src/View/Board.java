@@ -59,6 +59,7 @@ public class Board extends JPanel {
                 g2.setColor(Color.BLACK);
             }
         }
+        
     }
 
     void updateCompletedCrates() {
