@@ -91,7 +91,6 @@ public class PGController {
         }
 
         printBoard();
-
         return boardContent;
     }
 

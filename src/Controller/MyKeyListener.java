@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 
 public class MyKeyListener extends KeyAdapter {
     PGController controller;
-    int crateCounter;
 
     MyKeyListener(PGController controller) {
         this.controller = controller;
@@ -40,7 +39,7 @@ public class MyKeyListener extends KeyAdapter {
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         }
 
-        updateVictoryCrates();
+        controller.model.updateVictoryCrates();
 
         /** NEED TO FIX IF CRATE IS IN THE VICTORY TILE**/
         //controller.printBoard();
@@ -62,25 +61,5 @@ public class MyKeyListener extends KeyAdapter {
 
     private boolean isCompletedCrate(int posX, int posY) {
         return controller.getContent(posX, posY) == controller.model.COMPLETED_CRATE;
-    }
-
-
-    void updateVictoryCrates() {
-        controller.printBoard();
-        crateCounter = 0;
-        System.out.println("counter - " + crateCounter);
-        for (int i = 0; i < controller.boardContent.length; i++) {
-            for (int j = 0; j < controller.boardContent[0].length; j++) {
-                if(controller.boardContent[i][j] == controller.model.COMPLETED_CRATE) {
-                    crateCounter++;
-                }
-            }
-        }
-        if(crateCounter == 6) {
-            // user has beat the level
-            // move to the next level
-            new PGView().gameWonDialog();
-        }
-
     }
 }
