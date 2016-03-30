@@ -167,6 +167,7 @@ public class PGView extends JFrame {
     }
 
     private void createGui() {
+        controller.model.locateVictoryTiles(boardContent);
         board = new Board(this, cellSize);
         board.setPreferredSize(new Dimension(700, 400));
         contentPane.add(board);

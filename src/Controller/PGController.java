@@ -45,7 +45,7 @@ public class PGController {
         BOARDWIDTH = 11;
         BOARDHEIGHT = 19;
 
-        /** INTIIALIZING LEVELS **/
+        /** INITIALIZING LEVELS **/
         LEVEL_1 = "src/Controller/Levels/Level1_Sokoban.txt";
         LEVEL_2 = "src/Controller/Levels/Level2_Sokoban.txt";
         LEVEL_3 = "src/Controller/Levels/Level3_Sokoban.txt";
@@ -53,7 +53,7 @@ public class PGController {
         LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
 
         setGameType(LEVEL_1);
-        model = new PGModel();
+        model = new PGModel(this);
         view = new PGView(readFile(), this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
@@ -91,12 +91,11 @@ public class PGController {
         }
 
         printBoard();
-
         return boardContent;
     }
 
     // temporary. testing purposes
-    void printBoard() {
+    public void printBoard() {
         /** READING 2D ARRAY PURPOSES **/
         for (int i = 0; i < BOARDWIDTH; i++) {
             for (int j = 0; j < BOARDHEIGHT; j++) {
@@ -157,7 +156,7 @@ public class PGController {
         return boardContent[x][y];
     }
 
-    void repaintBoard() {
+    public void repaintBoard() {
         view.updateBoardContent(boardContent);
         view.board.repaint();
     }
@@ -167,6 +166,23 @@ public class PGController {
             for (int j = 0; j < boardContent[0].length; j++) {
                 boardContent[i][j] = board[i][j];
             }
+        }
+    }
+
+    public void updateGameStatus() {
+        if(model.gameOver) {
+
+        }
+    }
+
+    public void restartGame() {
+        switch(gameType) {
+            case "": setGameType(LEVEL_2);
+        }
+        if(gameType.equals(LEVEL_1)) {
+            setGameType(LEVEL_2);
+        } else if(gameType.equals(LEVEL_2)) {
+
         }
     }
 

@@ -9,23 +9,9 @@ public class Board extends JPanel {
     /** BOARD **/
     int cellSize;
 
-    /** 2d array w/ positions of victory tile**/
-    CoordinatePoint[] victoryTilesPositions;
-
     Board(PGView view, int cellSize) {
         this.view = view;
         this.cellSize = cellSize;
-        victoryTilesPositions = new CoordinatePoint[6];
-
-        int counter = 0;
-        for (int i = 0; i < view.boardContent.length; i++) {
-            for (int j = 0; j < view.boardContent[0].length; j++) {
-                if(view.boardContent[i][j] == view.controller.model.VICTORY_TILE) {
-                    // save all positions of victory tile into coordinate point.
-                    victoryTilesPositions[counter++] = new CoordinatePoint(i, j);
-                }
-            }
-        }
     }
     
     @Override
@@ -33,12 +19,15 @@ public class Board extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         setBackground(new Color(59,59,59));
+<<<<<<< HEAD
 //<<<<<<< HEAD
         //g2.d
 //=======
         placeVictoryTiles();
         updateCompletedCrates();
         view.controller.updateBoard(view.boardContent);
+=======
+>>>>>>> 8d66d3e22ffc5601155ae853391ed7393085b8ea
 
 //>>>>>>> e71e77689d83ae531cd3c710b71ed311cd48d571
         for (int i = 0; i < view.boardContent.length; i++) {
@@ -64,29 +53,5 @@ public class Board extends JPanel {
             }
         }
         
-    }
-
-    void updateCompletedCrates() {
-        for (int i = 0; i < victoryTilesPositions.length; i++) {
-            if(view.boardContent[victoryTilesPositions[i].getX()]
-                    [victoryTilesPositions[i].getY()] == view.controller.model.CRATE) {
-                // if it is empty at the position where there should be a victory tile,
-                // simply replace it w/ a victory tile
-                view.boardContent[victoryTilesPositions[i].getX()]
-                        [victoryTilesPositions[i].getY()] = view.controller.model.COMPLETED_CRATE;
-            }
-        }
-    }
-
-    void placeVictoryTiles() {
-        for (int i = 0; i < victoryTilesPositions.length; i++) {
-            if(view.boardContent[victoryTilesPositions[i].getX()]
-                                [victoryTilesPositions[i].getY()] == view.controller.model.EMPTY) {
-                // if it is empty at the position where there should be a victory tile,
-                // simply replace it w/ a victory tile
-                view.boardContent[victoryTilesPositions[i].getX()]
-                                 [victoryTilesPositions[i].getY()] = view.controller.model.VICTORY_TILE;
-            }
-        }
     }
 }
