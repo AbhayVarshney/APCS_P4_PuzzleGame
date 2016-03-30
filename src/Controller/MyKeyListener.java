@@ -32,19 +32,15 @@ public class MyKeyListener extends KeyAdapter {
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         } else if((isCrate(newMyX, newMyY) || isCompletedCrate(newMyX, newMyY)) &&
                   (isEmpty(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) ||
-                   isVictory(newMyX + (newMyX - myX), newMyY + (newMyY - myY)) ||
-                   isCompletedCrate(newMyX + (newMyX - myX), newMyY + (newMyY - myY)))) {
+                   isVictory(newMyX + (newMyX - myX), newMyY + (newMyY - myY)))) {
             controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         }
 
-        controller.model.updateVictoryCrates();
-
-        /** NEED TO FIX IF CRATE IS IN THE VICTORY TILE**/
-        //controller.printBoard();
+        controller.model.updateEndZone();
+        controller.model.updateVictoryCratesCounter();
         controller.repaintBoard(); // update the board
-
     }
 
     private boolean isVictory(int posX, int posY) {

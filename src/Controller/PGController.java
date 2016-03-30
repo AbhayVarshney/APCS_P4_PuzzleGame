@@ -95,7 +95,7 @@ public class PGController {
     }
 
     // temporary. testing purposes
-    void printBoard() {
+    public void printBoard() {
         /** READING 2D ARRAY PURPOSES **/
         for (int i = 0; i < BOARDWIDTH; i++) {
             for (int j = 0; j < BOARDHEIGHT; j++) {
@@ -166,6 +166,23 @@ public class PGController {
             for (int j = 0; j < boardContent[0].length; j++) {
                 boardContent[i][j] = board[i][j];
             }
+        }
+    }
+
+    public void updateGameStatus() {
+        if(model.gameOver) {
+
+        }
+    }
+
+    public void restartGame() {
+        switch(gameType) {
+            case "": setGameType(LEVEL_2);
+        }
+        if(gameType.equals(LEVEL_1)) {
+            setGameType(LEVEL_2);
+        } else if(gameType.equals(LEVEL_2)) {
+
         }
     }
 

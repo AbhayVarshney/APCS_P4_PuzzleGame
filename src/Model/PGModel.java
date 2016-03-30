@@ -5,9 +5,8 @@ import Controller.PGController;
 public class PGModel {
     char[][] boardBackground;   /** BEHIND THE SCENE BOARD **/
 
-    boolean gameOver;
-    int boardSize, cellSize;
-    int crateCounter;
+    public boolean gameOver;
+    private int crateCounter;
 
     private PGController controller;
 
@@ -34,6 +33,7 @@ public class PGModel {
         VICTORY_TILE = '.';  // victor_tile.gif
         BACKDROP = 'o';      // dark grey background
 
+        gameOver = false;
         this.controller = controller;
     }
 
@@ -41,7 +41,7 @@ public class PGModel {
         boardBackground = new char[18][10];
     }
 
-    public void placeVictoryTiles() {
+    public void updateEndZone() {
         for (int i = 0; i < victoryTilesPositions.length; i++) {
             if(controller.boardContent[victoryTilesPositions[i].getX()]
                     [victoryTilesPositions[i].getY()] == EMPTY) {
@@ -49,6 +49,13 @@ public class PGModel {
                 // simply replace it w/ a victory tile
                 controller.boardContent[victoryTilesPositions[i].getX()]
                         [victoryTilesPositions[i].getY()] = VICTORY_TILE;
+            } else if(controller.boardContent[victoryTilesPositions[i].getX()]
+                    [victoryTilesPositions[i].getY()] == CRATE) {
+                // if it is empty at the position where there should be a victory tile,
+                // simply replace it w/ a victory tile
+                controller.boardContent[victoryTilesPositions[i].getX()]
+                        [victoryTilesPositions[i].getY()] = COMPLETED_CRATE;
+                controller.repaintBoard();
             }
         }
         controller.repaintBoard();
@@ -67,36 +74,22 @@ public class PGModel {
         }
     }
 
-    public void updateCompletedCrates() {
-        for (int i = 0; i < victoryTilesPositions.length; i++) {
-            if(controller.boardContent[victoryTilesPositions[i].getX()]
-                    [victoryTilesPositions[i].getY()] == CRATE) {
-                // if it is empty at the position where there should be a victory tile,
-                // simply replace it w/ a victory tile
-                controller.boardContent[victoryTilesPositions[i].getX()]
-                        [victoryTilesPositions[i].getY()] = COMPLETED_CRATE;
-                controller.repaintBoard();
-            }
-        }
-    }
-
-    public void updateVictoryCrates() {
+    public void updateVictoryCratesCounter() {
         crateCounter = 0;
-        System.out.println("counter - " + crateCounter);
-
         for (int i = 0; i < controller.boardContent.length; i++) {
             for (int j = 0; j < controller.boardContent[0].length; j++) {
-                System.out.print(controller.boardContent[i][j] + " ");
                 if(controller.boardContent[i][j] == COMPLETED_CRATE) {
                     crateCounter++;
                 }
             }
-            System.out.println();
         }
-//        if(crateCounter == 6) {
-//            // user has beat the level
-//            // move to the next level
-//            new PGView().gameWonDialog();
-//        }
+
+        if(crateCounter == 6) {
+            // user has beat the level
+            // move to the next level
+            gameOver = true;
+        }
+
+        controller.updateGameStatus();
     }
 }

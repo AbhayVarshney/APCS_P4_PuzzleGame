@@ -20,10 +20,6 @@ public class Board extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
         setBackground(new Color(59,59,59));
 
-        view.controller.model.placeVictoryTiles();
-        view.controller.model.updateCompletedCrates();
-        view.controller.updateBoard(view.boardContent);
-
         for (int i = 0; i < view.boardContent.length; i++) {
             for (int j = 0; j < view.boardContent[0].length; j++) {
                 if(view.boardContent[i][j] == view.controller.model.BLOCK) {
