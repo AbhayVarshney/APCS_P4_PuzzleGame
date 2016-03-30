@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.awt.GridLayout;
 import java.io.IOException;
 
 public class PGView extends JFrame {
@@ -52,15 +53,15 @@ public class PGView extends JFrame {
     
     // Default constructor
     public PGView() {
-        WINDOW_WIDTH = 850;
-        WINDOW_HEIGHT = 600;
+        WINDOW_WIDTH = 1500;
+        WINDOW_HEIGHT = 1250;
     }
 
     public PGView(char[][] board, PGController controller) {
         this.controller = controller;
         this.boardContent = new char[board.length][board[0].length];
         WINDOW_WIDTH = 850;
-        WINDOW_HEIGHT = 600;
+        WINDOW_HEIGHT = 750;
        
         cellSize = 35;
 
@@ -76,8 +77,8 @@ public class PGView extends JFrame {
 
     private void makeWindow(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2);
-        int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2);
+        int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
+        int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2 );
         this.setTitle("Sokoban!");
         this.setBounds(x, y, WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,11 +133,20 @@ public class PGView extends JFrame {
         menuBar.add(menuItem_1);
         
         JPanel logoSign = new JPanel();
+        
+        
+        JPanel userInterface = new JPanel();
+        
         JMenuItem menuItem = new JMenuItem("");
-        //contentPane.add(logoSign);
+        //panel.setLayout(new BorderLayout());
+        //panel.setPreferredSize(new Dimension(800, 850));
         menuBar.add(menuItem);
         contentPane = new JPanel();
+        
+        contentPane.setLayout(new BorderLayout());
+        //panel.add(contentPane);
         setContentPane(contentPane);
+        
         //panel.add(contentPane);
         contentPane.setPreferredSize(new Dimension(100, 100));
     }
