@@ -28,11 +28,16 @@ public class PGView extends JFrame {
     public JMenuItem mntmLevel3;
     public JMenuItem mntmLevel4;
     public JMenuItem mntmLevel5;
+    
     public JMenu mnHelp;
 
     /** WINDOW **/
     private final int WINDOW_WIDTH;
     private final int WINDOW_HEIGHT;
+    
+    /** PANEL **/
+    private JPanel optionsPanel;
+    private JPanel logoSign;
 
     /** IMAGES **/
     public BufferedImage crate;
@@ -45,7 +50,7 @@ public class PGView extends JFrame {
 
     /** OBJECTS **/
     public Board board;
-    public Sprite sprite;
+    public Logo topLogo;
     public LeftComponents leftComponents;
 
     /** BOARD IMPORTANT **/
@@ -132,23 +137,13 @@ public class PGView extends JFrame {
         JMenuItem menuItem_1 = new JMenuItem("");
         menuBar.add(menuItem_1);
         
-        JPanel logoSign = new JPanel();
-        
-        
-        JPanel userInterface = new JPanel();
+
         
         JMenuItem menuItem = new JMenuItem("");
         //panel.setLayout(new BorderLayout());
         //panel.setPreferredSize(new Dimension(800, 850));
         menuBar.add(menuItem);
-        contentPane = new JPanel();
         
-        contentPane.setLayout(new BorderLayout());
-        //panel.add(contentPane);
-        setContentPane(contentPane);
-        
-        //panel.add(contentPane);
-        contentPane.setPreferredSize(new Dimension(100, 100));
     }
 
     private void loadImages() {
@@ -167,12 +162,35 @@ public class PGView extends JFrame {
     }
 
     private void createGui() {
+    	logoSign = new JPanel(); //top Panel
+       // logoSign.setPreferredSize(new Dimension(0, 0));
+    	//logoSign.setMaximumSize(new Dimension(WINDOW_WIDTH, 6000));
+    	logoSign.setMaximumSize(new Dimension(1091, 50));
+    	logoSign.setBackground(new Color(59,59,59));
+    	
+    	topLogo = new Logo(logo, WINDOW_WIDTH, 100);
+    	topLogo.setPreferredSize(new Dimension(WINDOW_WIDTH, 100));
+    	topLogo.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(3.0f)));
+        logoSign.add(topLogo);
+    	
+        optionsPanel = new JPanel(); //bottom Panel
+        optionsPanel.setMaximumSize(new Dimension(200, 18000));
+        optionsPanel.setBackground(Color.blue);
+        
+        contentPane = new JPanel();
+        contentPane.setPreferredSize(new Dimension(100, 100));
+        
         controller.model.locateVictoryTiles(boardContent);
+        
         board = new Board(this, cellSize);
         board.setPreferredSize(new Dimension(700, 400));
+        
+        add(logoSign);
+        add(contentPane);
         contentPane.add(board);
-        sprite = new Sprite();
-        leftComponents = new LeftComponents();
+        contentPane.setBackground(new Color(59,59,59));
+        
+        add(optionsPanel);
     }
 
     public void newLevelPrompter() {

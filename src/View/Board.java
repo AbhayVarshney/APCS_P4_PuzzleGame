@@ -19,17 +19,7 @@ public class Board extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         setBackground(new Color(59,59,59));
-<<<<<<< HEAD
-//<<<<<<< HEAD
-        //g2.d
-//=======
-        placeVictoryTiles();
-        updateCompletedCrates();
-        view.controller.updateBoard(view.boardContent);
-=======
->>>>>>> 8d66d3e22ffc5601155ae853391ed7393085b8ea
-
-//>>>>>>> e71e77689d83ae531cd3c710b71ed311cd48d571
+        
         for (int i = 0; i < view.boardContent.length; i++) {
             for (int j = 0; j < view.boardContent[0].length; j++) {
                 if(view.boardContent[i][j] == view.controller.model.BLOCK) {
