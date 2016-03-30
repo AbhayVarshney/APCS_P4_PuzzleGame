@@ -13,6 +13,7 @@ public class PGView extends JFrame {
     public PGController controller;
 
     /** MENUBAR **/
+    public JFrame panel;
     public JPanel contentPane;
     public JMenuBar menuBar;
     public JMenuItem mntmHowToPlay;
@@ -38,6 +39,7 @@ public class PGView extends JFrame {
     public BufferedImage wall;
     public BufferedImage victory_tile;
     public BufferedImage userSprite;
+    public BufferedImage logo;
     private int cellSize;
 
     /** OBJECTS **/
@@ -47,7 +49,7 @@ public class PGView extends JFrame {
 
     /** BOARD IMPORTANT **/
     public char[][] boardContent;
-
+    
     // Default constructor
     public PGView() {
         WINDOW_WIDTH = 850;
@@ -59,6 +61,7 @@ public class PGView extends JFrame {
         this.boardContent = new char[board.length][board[0].length];
         WINDOW_WIDTH = 850;
         WINDOW_HEIGHT = 600;
+       
         cellSize = 35;
 
         updateBoardContent(board);
@@ -80,6 +83,7 @@ public class PGView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+        //this.getContentP
     }
 
     private void loadMenuBar() {
@@ -126,11 +130,14 @@ public class PGView extends JFrame {
 
         JMenuItem menuItem_1 = new JMenuItem("");
         menuBar.add(menuItem_1);
-
+        
+        JPanel logoSign = new JPanel();
         JMenuItem menuItem = new JMenuItem("");
+        //contentPane.add(logoSign);
         menuBar.add(menuItem);
         contentPane = new JPanel();
         setContentPane(contentPane);
+        //panel.add(contentPane);
         contentPane.setPreferredSize(new Dimension(100, 100));
     }
 
@@ -141,6 +148,8 @@ public class PGView extends JFrame {
             wall = ImageIO.read(new File("images/gray_tile.gif"));
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));
+            logo = ImageIO.read(new File("images/logo.png"));
+            
         } catch (IOException e) {
             System.out.println("Images can't be found. " + e.getMessage());
             e.printStackTrace();
