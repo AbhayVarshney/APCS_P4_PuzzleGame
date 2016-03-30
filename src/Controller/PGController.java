@@ -45,7 +45,7 @@ public class PGController {
         BOARDWIDTH = 11;
         BOARDHEIGHT = 19;
 
-        /** INTIIALIZING LEVELS **/
+        /** INITIALIZING LEVELS **/
         LEVEL_1 = "src/Controller/Levels/Level1_Sokoban.txt";
         LEVEL_2 = "src/Controller/Levels/Level2_Sokoban.txt";
         LEVEL_3 = "src/Controller/Levels/Level3_Sokoban.txt";
@@ -53,7 +53,7 @@ public class PGController {
         LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
 
         setGameType(LEVEL_1);
-        model = new PGModel();
+        model = new PGModel(this);
         view = new PGView(readFile(), this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
@@ -157,7 +157,7 @@ public class PGController {
         return boardContent[x][y];
     }
 
-    void repaintBoard() {
+    public void repaintBoard() {
         view.updateBoardContent(boardContent);
         view.board.repaint();
     }

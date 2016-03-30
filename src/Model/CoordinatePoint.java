@@ -1,11 +1,5 @@
-package View;
+package Model;
 
-/**
- * APCS_P4_PuzzleGame
- * Name: Abhay Varshney   Period 4   3/28/16
- * Time Spent: 11:00 AM to
- * Reflection:
- */
 public class CoordinatePoint {
     private int myX;
     private int myY;
