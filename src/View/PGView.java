@@ -1,9 +1,12 @@
 package View;
 
 import Controller.PGController;
+import javafx.scene.layout.Border;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,9 +41,10 @@ public class PGView extends JFrame {
     /** PANEL **/
     private JPanel optionsPanel;
     private JPanel logoSign;
-    private JToggleButton leftImage;
-    private JToggleButton rightImage;
-    private JTextArea moves;
+    private JButton leftImage;
+    private JButton rightImage;
+    private JLabel moves;
+    private JLabel movesCount;
 
     /** IMAGES **/
     public BufferedImage crate;
@@ -183,13 +187,30 @@ public class PGView extends JFrame {
         optionsPanel = new JPanel(); //bottom Panel
         optionsPanel.setMaximumSize(new Dimension(WINDOW_WIDTH, 18000));
         optionsPanel.setBackground(new Color(59, 59, 59));
-        leftImage = new JToggleButton();
-        rightImage = new JToggleButton();
-        moves = new JTextArea("Moves");
+        
+        leftImage = new JButton();    //leftClick Button
+        Arrows left = new Arrows(leftArrow, 50, 50, 1);
+        leftImage.add(left);
+        
+        movesCount = new JLabel();
+        movesCount.setForeground(Color.WHITE);
+        movesCount.setText("0");
+        LineBorder border = new LineBorder(Color.BLACK, 3);
+        movesCount.setBorder(border);
+        
+        rightImage = new JButton();	  //rightClick Button
+        Logo right = new Logo(leftArrow, 50, 50);
+        rightImage.add(right);
+        
+        moves = new JLabel(); //Text for moves
+        moves.setForeground(Color.WHITE);
+        moves.setText("Moves: ");
         moves.setBackground(new Color(59, 59, 59));
+        
         optionsPanel.add(moves);
-       
-        //optionsPanel.add(moves);
+        optionsPanel.add(leftImage);
+        optionsPanel.add(movesCount);
+        optionsPanel.add(rightImage);
         
         
         contentPane = new JPanel();
