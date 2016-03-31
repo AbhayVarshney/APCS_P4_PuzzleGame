@@ -38,6 +38,9 @@ public class PGView extends JFrame {
     /** PANEL **/
     private JPanel optionsPanel;
     private JPanel logoSign;
+    private JToggleButton leftImage;
+    private JToggleButton rightImage;
+    private JTextArea moves;
 
     /** IMAGES **/
     public BufferedImage crate;
@@ -46,6 +49,8 @@ public class PGView extends JFrame {
     public BufferedImage victory_tile;
     public BufferedImage userSprite;
     public BufferedImage logo;
+    public BufferedImage leftArrow;
+    public BufferedImage rightArrow;
     private int cellSize;
 
     /** OBJECTS **/
@@ -154,6 +159,9 @@ public class PGView extends JFrame {
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));
             logo = ImageIO.read(new File("images/logo.png"));
+            leftArrow = ImageIO.read(new File("images/left_arrow.jpg"));
+            rightArrow = ImageIO.read(new File("images/right_arrow.png"));
+            
             
         } catch (IOException e) {
             System.out.println("Images can't be found. " + e.getMessage());
@@ -163,8 +171,6 @@ public class PGView extends JFrame {
 
     private void createGui() {
     	logoSign = new JPanel(); //top Panel
-       // logoSign.setPreferredSize(new Dimension(0, 0));
-    	//logoSign.setMaximumSize(new Dimension(WINDOW_WIDTH, 6000));
     	logoSign.setMaximumSize(new Dimension(1091, 50));
     	logoSign.setBackground(new Color(59,59,59));
     	
@@ -173,9 +179,18 @@ public class PGView extends JFrame {
     	topLogo.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(3.0f)));
         logoSign.add(topLogo);
     	
+        //userInterface
         optionsPanel = new JPanel(); //bottom Panel
-        optionsPanel.setMaximumSize(new Dimension(200, 18000));
-        optionsPanel.setBackground(Color.blue);
+        optionsPanel.setMaximumSize(new Dimension(WINDOW_WIDTH, 18000));
+        optionsPanel.setBackground(new Color(59, 59, 59));
+        leftImage = new JToggleButton();
+        rightImage = new JToggleButton();
+        moves = new JTextArea("Moves");
+        moves.setBackground(new Color(59, 59, 59));
+        optionsPanel.add(moves);
+       
+        //optionsPanel.add(moves);
+        
         
         contentPane = new JPanel();
         contentPane.setPreferredSize(new Dimension(100, 100));
