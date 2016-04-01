@@ -1,13 +1,20 @@
 package Model;
 
 import Controller.PGController;
+import java.util.*;
 
 public class PGModel {
     char[][] boardBackground;   /** BEHIND THE SCENE BOARD **/
 
     public boolean gameOver;
     private int crateCounter;
-
+    //the moves int is used to keep track of moves and is 
+    //also used when going back and forth in the movelist
+    private int moves = 0;
+    
+    //TO SAVE THE MOVES HOMEBOY
+    List<char [][]> moveList = new ArrayList<>();
+    
     private PGController controller;
 
     public final char BLOCK;
@@ -91,5 +98,17 @@ public class PGModel {
         }
 
         controller.updateGameStatus();
+    }
+
+    public void increaseMove() {
+    	moves++;
+    }
+    
+    public int getMoves() {
+    	return moves;
+    }
+    
+    public void addBoard() {
+    	moveList.add(boardBackground);
     }
 }
