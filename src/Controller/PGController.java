@@ -6,16 +6,17 @@ import View.PGView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.Timer;
+import javax.swing.Timer;
 
 public class PGController {
     public PGView view;
     public PGModel model;
     public MyKeyListener keyListener;
-    public MouseListener mouse;
+    public MyMouseListener mouse;
 
     /** TIMER **/
-    Timer time;
+    Timer timer;
+    long timerCounter;
 
     /** GAME STATUS **/
     boolean gameOver;
@@ -52,10 +53,15 @@ public class PGController {
         LEVEL_4 = "src/Controller/Levels/Level4_Sokoban.txt";
         LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
 
+        /** INITIALIZING TIMER **/
+        timer = new Timer(1000, new MyTimerActionListener(this));
+        timer.setInitialDelay(1000);
+        timer.start();
+
         setGameType(LEVEL_1); // default level
         model = new PGModel(this);
         view = new PGView(readFile(), this);
-        mouse = new MouseListener(this);
+        mouse = new MyMouseListener(this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
         // intialize objects
@@ -180,6 +186,7 @@ public class PGController {
 
     /** RESPONSIBLE FOR MOVING TO THE NEXT LEVEL **/
     public void restartGame(boolean isNextLevel) {
+        timer.stop();
         if(isNextLevel) {
             if(userLevel == 1) {
                 setGameType(LEVEL_2);
@@ -198,6 +205,10 @@ public class PGController {
                 userLevel = 1;
             }
         }
+
+        // restart time
+        timerCounter = 0;
+        timer.start();
 
         view.updateBoardContent(readFile());
         repaintBoard();

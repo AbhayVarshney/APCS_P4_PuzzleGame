@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MouseListener extends MouseAdapter implements ActionListener {
+public class MyMouseListener extends MouseAdapter implements ActionListener {
     PGController controller;
-    MouseListener(PGController controller) {
+    MyMouseListener(PGController controller) {
         this.controller = controller;
     }
     public void actionPerformed(ActionEvent e) {
@@ -19,6 +19,7 @@ public class MouseListener extends MouseAdapter implements ActionListener {
             // don't change the level. simply restart the game
             controller.restartGame(false);
         } else if(e.getSource() == controller.view.mntmExit) { /** user wants to exit the game **/
+            controller.timer.stop();
             controller.view.dispose();
         } else if(e.getSource() == controller.view.mntmHowToPlay) { /** user clicked help menu button **/
         	System.out.println("How to play");
