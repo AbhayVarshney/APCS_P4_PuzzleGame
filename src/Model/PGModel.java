@@ -11,9 +11,10 @@ public class PGModel {
     //the moves int is used to keep track of moves and is 
     //also used when going back and forth in the movelist
     private int moves = 0;
-    
+    private int valOfChange = 0;
     //TO SAVE THE MOVES HOMEBOY
     List<char [][]> moveList = new ArrayList<>();
+    
     
     private PGController controller;
 
@@ -110,5 +111,11 @@ public class PGModel {
     
     public void addBoard() {
     	moveList.add(boardBackground);
+    }
+    
+    //Checks if it is possible to move ahead in the move list
+    public void isValidChange(int ind, int increment) {
+    	if ( (ind + increment < 0) || (ind + increment > moveList.size()))
+    		valOfChange = ind + increment;
     }
 }

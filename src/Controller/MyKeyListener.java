@@ -37,7 +37,10 @@ public class MyKeyListener extends KeyAdapter {
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         }
-
+        
+        controller.model.addBoard();
+        controller.model.increaseMove();
+        System.out.println(controller.model.getMoves());
         controller.model.updateEndZone();
         controller.model.updateVictoryCratesCounter();
         controller.repaintBoard(); // update the board
