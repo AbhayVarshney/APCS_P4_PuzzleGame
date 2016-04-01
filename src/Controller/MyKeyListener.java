@@ -19,10 +19,10 @@ public class MyKeyListener extends KeyAdapter {
 
         int newMyX = myX;
         int newMyY = myY;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { newMyY++; }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { newMyY--; }
-        else if (e.getKeyCode() == KeyEvent.VK_UP )   { newMyX--; }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; }
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { newMyY++; controller.model.increaseMove();}
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { newMyY--; controller.model.increaseMove();}
+        else if (e.getKeyCode() == KeyEvent.VK_UP )   { newMyX--; controller.model.increaseMove();}
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; controller.model.increaseMove();}
         else if (e.getKeyCode() == KeyEvent.VK_1) { // left
         	controller.model.isValidChange(controller.model.getMoves(), -1);
         	System.out.println("LEFT ARROW CLICKED");
@@ -45,11 +45,10 @@ public class MyKeyListener extends KeyAdapter {
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         }
         
-        /** SASAN **/
+        
         controller.model.addBoard(controller.boardContent);
-        controller.model.increaseMove();
         System.out.println(controller.model.getMoves());
-        /** SASAN **/
+       
         
         controller.model.updateEndZone();
         controller.model.updateVictoryCratesCounter();
