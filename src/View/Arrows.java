@@ -22,7 +22,8 @@ public class Arrows extends JPanel{
 	}
 	@Override
 	public void paintComponent(Graphics g) {
-		
+		System.out.println("Width: " + WIDTH);
+		System.out.println("Height: " + HEIGHT);
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
 		

@@ -163,7 +163,7 @@ public class PGView extends JFrame {
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));
             logo = ImageIO.read(new File("images/logo.png"));
-            leftArrow = ImageIO.read(new File("images/left_arrow.jpg"));
+            leftArrow = ImageIO.read(new File("images/left_arrow.png"));
             rightArrow = ImageIO.read(new File("images/right_arrow.png"));
             
             
@@ -188,9 +188,19 @@ public class PGView extends JFrame {
         optionsPanel.setMaximumSize(new Dimension(WINDOW_WIDTH, 18000));
         optionsPanel.setBackground(new Color(59, 59, 59));
         
-        leftImage = new JButton();    //leftClick Button
-        Arrows left = new Arrows(leftArrow, 50, 50, 1);
-        leftImage.add(left);
+        //leftImage = new JButton();    //leftClick Button
+        //Arrows left = new Arrows(leftArrow, 50, 50, 1);
+        //leftImage.add(left);
+        JButton leftButton = new JButton(){
+        	@Override
+        	public void paintComponent(Graphics g){
+        		super.paintComponent(g);
+        		g.drawImage(leftArrow, -3, -2, 25, 25, null);
+        		
+        		
+        	}
+        };
+        leftButton.setPreferredSize(new Dimension(20, 20));
         
         movesCount = new JLabel();
         movesCount.setForeground(Color.WHITE);
@@ -198,9 +208,18 @@ public class PGView extends JFrame {
         LineBorder border = new LineBorder(Color.BLACK, 3);
         movesCount.setBorder(border);
         
-        rightImage = new JButton();	  //rightClick Button
-        Logo right = new Logo(leftArrow, 50, 50);
-        rightImage.add(right);
+        JButton rightButton = new JButton(){
+        	@Override
+        	public void paintComponent(Graphics g){
+        		super.paintComponent(g);
+        		g.drawImage(rightArrow, -3, -2, 25, 25, null);
+        		
+        		
+        	}
+        };
+        rightButton.setOpaque(true);
+        rightButton.setBackground(new Color(42, 42, 42));
+        rightButton.setPreferredSize(new Dimension(20, 20));
         
         moves = new JLabel(); //Text for moves
         moves.setForeground(Color.WHITE);
@@ -208,9 +227,9 @@ public class PGView extends JFrame {
         moves.setBackground(new Color(59, 59, 59));
         
         optionsPanel.add(moves);
-        optionsPanel.add(leftImage);
+        optionsPanel.add(leftButton);
         optionsPanel.add(movesCount);
-        optionsPanel.add(rightImage);
+        optionsPanel.add(rightButton);
         
         
         contentPane = new JPanel();
