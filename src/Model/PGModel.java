@@ -10,10 +10,10 @@ public class PGModel {
     private int crateCounter;
     //the moves int is used to keep track of moves and is 
     //also used when going back and forth in the movelist
-    private int moves = 0;
+    private int currentInd = 0;
     private int valOfChange = 0;
     //TO SAVE THE MOVES HOMEBOY
-    List<char [][]> moveList = new ArrayList<>();
+    ArrayList<char [][]> moveHistory = new ArrayList<>();
     
     
     private PGController controller;
@@ -101,21 +101,28 @@ public class PGModel {
         controller.updateGameStatus();
     }
 
+    // setter method
     public void increaseMove() {
-    	moves++;
+    	currentInd++;
     }
     
+    // getter method
     public int getMoves() {
-    	return moves;
+    	return currentInd;
     }
     
-    public void addBoard() {
-    	moveList.add(boardBackground);
+    public void addBoard(char[][] board) {
+    	moveHistory.add(board);
     }
     
     //Checks if it is possible to move ahead in the move list
     public void isValidChange(int ind, int increment) {
-    	if ( (ind + increment < 0) || (ind + increment > moveList.size()))
-    		valOfChange = ind + increment;
+    	if ( (ind + increment > 0) || (ind + increment < moveHistory.size()-1)) {
+    		currentInd = ind + increment;
+    		controller.updateBoard(moveHistory.get(ind + increment));
+    		controller.repaintBoard();
+    	}
+    	
     }
+    
 }
