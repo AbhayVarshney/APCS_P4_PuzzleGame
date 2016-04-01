@@ -260,8 +260,7 @@ public class PGView extends JFrame {
         JOptionPane wonGame = new JOptionPane();
         int response = wonGame.showInternalConfirmDialog(this.getContentPane(), wonGameMessage, "You win!",
                 JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
-        if(response == 0) controller.userLevel++; // move to the next level!
-        else this.dispose();           // quit
+        if(response != 0) this.dispose(); // quit
 
     }
 

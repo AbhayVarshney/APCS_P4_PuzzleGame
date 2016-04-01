@@ -52,12 +52,17 @@ public class PGController {
         LEVEL_4 = "src/Controller/Levels/Level4_Sokoban.txt";
         LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
 
-        setGameType(LEVEL_1);
+        setGameType(LEVEL_1); // default level
+        playGame();
+    }
+
+    void playGame() {
         model = new PGModel(this);
         view = new PGView(readFile(), this);
+        // intialize objects
+        mouse = new MouseListener(this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
-        mouse = new MouseListener(this);
         addListeners();
     }
 
@@ -141,7 +146,7 @@ public class PGController {
         return -1; // no position found... shouldn't get to here
     }
 
-    int getYValue(char element) {
+    public int getYValue(char element) {
         for (int i = 0; i < boardContent.length; i++) {
             for (int j = 0; j < boardContent[0].length; j++) {
                 if(boardContent[i][j] == element) {
@@ -152,7 +157,7 @@ public class PGController {
         return -1; // no position found... shouldn't get to here
     }
 
-    char getContent(int x, int y) {
+    public char getContent(int x, int y) {
         return boardContent[x][y];
     }
 
@@ -169,58 +174,37 @@ public class PGController {
         }
     }
 
+    /** IF THE USER HAS WON THE GAME, THIS METHOD SHOULD RUN **/
     public void updateGameStatus() {
         if(model.gameOver) {
-
+            view.gameWonDialog();
+            restartGame(true);
         }
     }
 
-    public void restartGame() {
-        switch(gameType) {
-            case "": setGameType(LEVEL_2);
-        }
-        if(gameType.equals(LEVEL_1)) {
-            setGameType(LEVEL_2);
-        } else if(gameType.equals(LEVEL_2)) {
-
-        }
-    }
-
-//    void start() {
-//        switch (gameType) {
-//            case "easy":
-//                boardSize = 10;
-//                cellSize = 40;
-//                break;
-//            case "medium":
-//                boardSize = 15;
-//                cellSize = 26;
-//                break;
-//            case "hard":
-//                boardSize = 20;
-//                cellSize = 20;
-//                break;
-//            default:
-//                boardSize = 10;
-//                cellSize = 40;
-//                break;
-//        }
-//    }
-
-
-    //mouse stuff
-    /*
-    public class Mouse extends MouseAdapter {
-        public void mousePressed(MouseEvent e) {
-            if (first) {
-                first = false;
-                time = new Timer(1000, d -> {
-                    sec++;
-                   
-                });
-                
+    /** RESPONSIBLE FOR MOVING TO THE NEXT LEVEL **/
+    public void restartGame(boolean isNextLevel) {
+        if(isNextLevel) {
+            if(userLevel == 1) {
+                setGameType(LEVEL_2);
+                userLevel++;
+            } else if(userLevel == 2) {
+                setGameType(LEVEL_3);
+                userLevel++;
+            } else if(userLevel == 3) {
+                setGameType(LEVEL_4);
+                userLevel++;
+            } else if(userLevel == 4) {
+                setGameType(LEVEL_5);
+                userLevel++;
+            } else if(userLevel == 5) {
+                setGameType(LEVEL_1); // restart to level 1
+                userLevel = 1;
             }
-            time.stop();
         }
-    }*/
+
+        System.out.println("user has restarted the level!");
+        playGame();
+        repaintBoard();
+    }
 }
