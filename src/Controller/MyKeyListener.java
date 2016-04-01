@@ -19,10 +19,27 @@ public class MyKeyListener extends KeyAdapter {
 
         int newMyX = myX;
         int newMyY = myY;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { newMyY++; controller.model.increaseMove();}
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { newMyY--; controller.model.increaseMove();}
-        else if (e.getKeyCode() == KeyEvent.VK_UP )   { newMyX--; controller.model.increaseMove();}
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; controller.model.increaseMove();}
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { 
+        	newMyY++; 
+        	controller.model.increaseMove();
+        	controller.model.addBoard(controller.boardContent);
+        	//add addboard to everything secept for if 1 or 2 pressed
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { 
+        	newMyY--; 
+        	controller.model.increaseMove();
+        	controller.model.addBoard(controller.boardContent);
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_UP )   { 
+        	newMyX--; 
+        	controller.model.increaseMove();
+        	controller.model.addBoard(controller.boardContent);
+        	}
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { 
+        	newMyX++; 
+        	controller.model.increaseMove();
+        	controller.model.addBoard(controller.boardContent);
+            }
         else if (e.getKeyCode() == KeyEvent.VK_1) { // left
         	controller.model.isValidChange(controller.model.getMoves(), -1);
         	System.out.println("LEFT ARROW CLICKED");
@@ -46,7 +63,6 @@ public class MyKeyListener extends KeyAdapter {
         }
         
         
-        controller.model.addBoard(controller.boardContent);
         System.out.println(controller.model.getMoves());
        
         
