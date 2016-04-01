@@ -76,7 +76,6 @@ public class PGView extends JFrame {
         this.boardContent = new char[board.length][board[0].length];
         WINDOW_WIDTH = 850;
         WINDOW_HEIGHT = 750;
-       
         cellSize = 35;
 
         updateBoardContent(board);
@@ -265,6 +264,8 @@ public class PGView extends JFrame {
     }
 
     public void updateBoardContent(char[][] board) {
+        this.boardContent = new char[board.length][board[0].length];
+
         // COPYING/UPDATING BOARD CONTENT
         for (int i = 0; i < boardContent.length; i++) {
             for (int j = 0; j < boardContent[0].length; j++) {

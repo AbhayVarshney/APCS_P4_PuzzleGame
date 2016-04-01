@@ -1,7 +1,5 @@
 package Controller;
 
-import View.PGView;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

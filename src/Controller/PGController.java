@@ -53,16 +53,12 @@ public class PGController {
         LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
 
         setGameType(LEVEL_1); // default level
-        playGame();
-    }
-
-    void playGame() {
         model = new PGModel(this);
         view = new PGView(readFile(), this);
-        // intialize objects
         mouse = new MouseListener(this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
+        // intialize objects
         addListeners();
     }
 
@@ -203,8 +199,7 @@ public class PGController {
             }
         }
 
-        System.out.println("user has restarted the level!");
-        playGame();
+        view.updateBoardContent(readFile());
         repaintBoard();
     }
 }
