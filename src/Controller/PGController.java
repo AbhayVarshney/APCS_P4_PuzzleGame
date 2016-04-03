@@ -15,8 +15,8 @@ public class PGController {
     public MyMouseListener mouse;
 
     /** TIMER **/
-    Timer timer;
-    long timerCounter;
+    public Timer timer;
+    public long timerCounter;
 
     /** GAME STATUS **/
     boolean gameOver;
