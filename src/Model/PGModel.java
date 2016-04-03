@@ -7,6 +7,7 @@ public class PGModel {
 
     public boolean gameOver;
     private int crateCounter;
+    private int flagCounter;
 
     private PGController controller;
 
@@ -62,7 +63,15 @@ public class PGModel {
     }
 
     public void locateVictoryTiles(char[][] boardContent) {
-        victoryTilesPositions = new CoordinatePoint[6];
+        flagCounter = 0;
+        for (int i = 0; i < boardContent.length; i++) {
+            for (int j = 0; j < boardContent[0].length; j++) {
+                if(boardContent[i][j] == controller.model.VICTORY_TILE) {
+                    flagCounter++;
+                }
+            }
+        }
+        victoryTilesPositions = new CoordinatePoint[flagCounter];
         int counter = 0;
         for (int i = 0; i < boardContent.length; i++) {
             for (int j = 0; j < boardContent[0].length; j++) {
@@ -84,7 +93,7 @@ public class PGModel {
             }
         }
 
-        if(crateCounter == 6) {
+        if(crateCounter == flagCounter) {
             // user has beat the level
             // move to the next level
             gameOver = true;
