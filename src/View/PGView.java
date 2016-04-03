@@ -255,7 +255,7 @@ public class PGView extends JFrame {
     }
 
     public void gameWonDialog() {
-        String wonGameMessage = "Congrats! You beat the game!\n Would you like to play again?";
+        String wonGameMessage = "Congrats! You beat the game!\n Would you like to move to the next game?";
         JOptionPane wonGame = new JOptionPane();
         int response = wonGame.showInternalConfirmDialog(this.getContentPane(), wonGameMessage, "You win!",
                 JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);

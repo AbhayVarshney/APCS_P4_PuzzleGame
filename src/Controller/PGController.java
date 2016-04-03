@@ -211,6 +211,7 @@ public class PGController {
         timer.start();
 
         view.updateBoardContent(readFile());
+        model.locateVictoryTiles(boardContent);
         repaintBoard();
     }
 }

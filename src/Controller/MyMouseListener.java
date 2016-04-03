@@ -1,5 +1,7 @@
 package Controller;
 
+import View.PGView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,7 +49,11 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
                 System.out.println("Error: " + b.getMessage());
                 b.getStackTrace();
             }
-        } else if(e.getSource() == controller.view.mntmLevel1) { // user wants to change the level
+        } else if(e.getSource() == controller.view.mntmHighScore) { /** User has opened high score option **/
+
+        }
+
+        else if(e.getSource() == controller.view.mntmLevel1) { // user wants to change the level
             controller.userLevel = 5;
             controller.restartGame(true);
         } else if(e.getSource() == controller.view.mntmLevel2) { // user wants to change the level
