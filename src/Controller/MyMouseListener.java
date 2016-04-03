@@ -53,8 +53,10 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
 
         } else if(e.getSource() == controller.view.leftButton) {
             System.out.println("left arrow clicked!");
+            controller.view.requestFocus();
         } else if(e.getSource() == controller.view.rightButton) {
             System.out.println("right arrow clicked!");
+            controller.view.requestFocus();
         }
 
         else if(e.getSource() == controller.view.mntmLevel1) { // user wants to change the level

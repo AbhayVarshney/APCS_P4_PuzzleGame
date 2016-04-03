@@ -1,5 +1,6 @@
 package View;
 
+import Controller.MyKeyListener;
 import Controller.PGController;
 
 import javax.imageio.ImageIO;
@@ -39,10 +40,8 @@ public class PGView extends JFrame {
     /** PANEL **/
     private JPanel optionsPanel;
     private JPanel logoSign;
-    private JButton leftImage;
-    private JButton rightImage;
     private JLabel moves;
-    private JLabel movesCount;
+    public JLabel movesCount;
 
     /** IMAGES **/
     public BufferedImage crate;
@@ -58,7 +57,6 @@ public class PGView extends JFrame {
     /** OBJECTS **/
     public Board board;
     public Logo topLogo;
-    public LeftComponents leftComponents;
 
     /** BOARD IMPORTANT **/
     public char[][] boardContent;
@@ -184,7 +182,7 @@ public class PGView extends JFrame {
     	topLogo.setPreferredSize(new Dimension(WINDOW_WIDTH, 100));
         logoSign.add(topLogo);
     	
-        //userInterface
+        /** OPTIONS PANEL **/
         optionsPanel = new JPanel(); //bottom Panel
         optionsPanel.setMaximumSize(new Dimension(WINDOW_WIDTH, 18000));
         optionsPanel.setBackground(new Color(59, 59, 59));
@@ -264,13 +262,13 @@ public class PGView extends JFrame {
         
         board = new Board(this, cellSize);
         board.setPreferredSize(new Dimension(700, 400));
-        
         add(logoSign);
         add(contentPane);
         contentPane.add(board);
         contentPane.setBackground(new Color(59,59,59));
-        
+
         add(optionsPanel);
+        setFocusable(true);
     }
 
     public void gameWonDialog() {
