@@ -23,22 +23,27 @@ public class MyKeyListener extends KeyAdapter {
         	newMyY++; 
         	controller.model.increaseMove();
         	controller.model.addBoard(controller.boardContent);
+        	controller.model.print(controller.model.moveHistory);
         	//add addboard to everything secept for if 1 or 2 pressed
         }
         else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { 
         	newMyY--; 
         	controller.model.increaseMove();
-        	controller.model.addBoard(controller.boardContent);
+        	char[][] board = controller.boardContent;
+        	controller.model.addBoard(board);
+        	controller.model.print(controller.model.moveHistory);
         }
         else if (e.getKeyCode() == KeyEvent.VK_UP )   { 
         	newMyX--; 
         	controller.model.increaseMove();
         	controller.model.addBoard(controller.boardContent);
+        	controller.model.print(controller.model.moveHistory);
         	}
         else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { 
         	newMyX++; 
         	controller.model.increaseMove();
         	controller.model.addBoard(controller.boardContent);
+        	controller.model.print(controller.model.moveHistory);
             }
         else if (e.getKeyCode() == KeyEvent.VK_1) { // left
         	controller.model.isValidChange(controller.model.getMoves(), -1);

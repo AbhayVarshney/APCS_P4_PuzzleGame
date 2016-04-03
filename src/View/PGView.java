@@ -245,7 +245,7 @@ public class PGView extends JFrame {
         contentPane.add(board);
         contentPane.setBackground(new Color(59,59,59));
         
-        //add(optionsPanel);
+       // add(optionsPanel);
     }
 
     public void newLevelPrompter() {

@@ -13,7 +13,7 @@ public class PGModel {
     private int currentInd = 0;
     private int valOfChange = 0;
     //TO SAVE THE MOVES HOMEBOY
-    ArrayList<char [][]> moveHistory = new ArrayList<>();
+    public ArrayList<char [][]> moveHistory = new ArrayList<>();
     
     
     private PGController controller;
@@ -131,11 +131,26 @@ public class PGModel {
     			System.out.println();
     		}
     	}
+    	
 //    	if ( (ind + increment > 0) || (ind + increment < moveHistory.size()-1)) {
 //    		currentInd = ind + increment;
 //    		controller.updateBoard(moveHistory.get(ind + increment));
 //    		controller.repaintBoard();
 //    	}	
+    }
+    
+    public void print(ArrayList<char [][]> moveHistory) {
+    	for(int i = 0; i < moveHistory.size(); i++) {
+    		System.out.println();
+    		System.out.println();
+    		// printing the board
+    		for(int j = 0; j < moveHistory.get(i).length; j++) {
+    			for(int k = 0; k < (moveHistory.get(i))[j].length; k++) {
+    				System.out.print(moveHistory.get(i)[j][k] + " ");
+    			}
+    			System.out.println();
+    		}
+    	}
     }
     
 }
