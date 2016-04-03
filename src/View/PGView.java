@@ -1,7 +1,6 @@
 package View;
 
 import Controller.PGController;
-import javafx.scene.layout.Border;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,7 +9,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.awt.GridLayout;
 import java.io.IOException;
 
 public class PGView extends JFrame {
@@ -64,6 +62,12 @@ public class PGView extends JFrame {
 
     /** BOARD IMPORTANT **/
     public char[][] boardContent;
+
+    /** OPTIONS PANEL **/
+    public JButton leftButton;
+    public JButton rightButton;
+    public JLabel timeText;
+    public JLabel time;
     
     // Default constructor
     public PGView() {
@@ -164,8 +168,6 @@ public class PGView extends JFrame {
             logo = ImageIO.read(new File("images/logo.png"));
             leftArrow = ImageIO.read(new File("images/left_arrow.png"));
             rightArrow = ImageIO.read(new File("images/right_arrow.png"));
-            
-            
         } catch (IOException e) {
             System.out.println("Images can't be found. " + e.getMessage());
             e.printStackTrace();
@@ -176,61 +178,85 @@ public class PGView extends JFrame {
     	logoSign = new JPanel(); //top Panel
     	logoSign.setMaximumSize(new Dimension(1091, 50));
     	logoSign.setBackground(new Color(59,59,59));
-    	
+
+        /** TOP PART OF GUI **/
     	topLogo = new Logo(logo, WINDOW_WIDTH, 100);
     	topLogo.setPreferredSize(new Dimension(WINDOW_WIDTH, 100));
-    	topLogo.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(3.0f)));
         logoSign.add(topLogo);
     	
         //userInterface
         optionsPanel = new JPanel(); //bottom Panel
         optionsPanel.setMaximumSize(new Dimension(WINDOW_WIDTH, 18000));
         optionsPanel.setBackground(new Color(59, 59, 59));
-        
-        //leftImage = new JButton();    //leftClick Button
-        //Arrows left = new Arrows(leftArrow, 50, 50, 1);
-        //leftImage.add(left);
-        JButton leftButton = new JButton(){
+
+        /** LEFT ARROW **/
+        leftButton = new JButton(){
         	@Override
         	public void paintComponent(Graphics g){
         		super.paintComponent(g);
         		g.drawImage(leftArrow, -3, -2, 25, 25, null);
-        		
-        		
         	}
         };
         leftButton.setPreferredSize(new Dimension(20, 20));
-        
+        leftButton.setBorder(new LineBorder(Color.WHITE, 1));
+
+        /** MOVES LABEL/# **/
         movesCount = new JLabel();
         movesCount.setForeground(Color.WHITE);
         movesCount.setText("0");
-        LineBorder border = new LineBorder(Color.BLACK, 3);
-        movesCount.setBorder(border);
-        
-        JButton rightButton = new JButton(){
+
+        /** RIGHT ARROW **/
+        rightButton = new JButton(){
         	@Override
         	public void paintComponent(Graphics g){
         		super.paintComponent(g);
         		g.drawImage(rightArrow, -3, -2, 25, 25, null);
-        		
-        		
         	}
         };
+
         rightButton.setOpaque(true);
         rightButton.setBackground(new Color(42, 42, 42));
         rightButton.setPreferredSize(new Dimension(20, 20));
-        
+        rightButton.setBorder(new LineBorder(Color.WHITE, 1));
+
+        /** MOVES Text **/
         moves = new JLabel(); //Text for moves
         moves.setForeground(Color.WHITE);
         moves.setText("Moves: ");
         moves.setBackground(new Color(59, 59, 59));
-        
-        optionsPanel.add(moves);
-        optionsPanel.add(leftButton);
-        optionsPanel.add(movesCount);
-        optionsPanel.add(rightButton);
-        
-        
+
+        JPanel movesPanel = new JPanel();
+        movesPanel.setPreferredSize(new Dimension(10,-50));
+        movesPanel.setBackground(new Color(59,59,59));
+
+        JPanel timePanel = new JPanel();
+        timePanel.setBackground(new Color(59,59,59));
+
+        timeText = new JLabel();
+        timeText.setForeground(Color.WHITE);
+        timeText.setText("Time: ");
+        timeText.setBackground(new Color(59, 59, 59));
+
+        time = new JLabel();
+        time.setForeground(Color.WHITE);
+        time.setText("0 seconds");
+
+        /** ADDING OBJECTS TO MOVES PANEL **/
+        movesPanel.add(moves);
+        movesPanel.add(leftButton);
+        movesPanel.add(movesCount);
+        movesPanel.add(rightButton);
+
+        /** ADDING OBJECTS TO TIME PANEL **/
+        timePanel.add(timeText);
+        timePanel.add(time);
+
+        /** ADDING OBJECTS TO OPTION PANEL **/
+        optionsPanel.setBackground(new Color(42,42,42));
+        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+        optionsPanel.add(movesPanel);
+        optionsPanel.add(timePanel);
+
         contentPane = new JPanel();
         contentPane.setPreferredSize(new Dimension(100, 100));
         
@@ -244,14 +270,7 @@ public class PGView extends JFrame {
         contentPane.add(board);
         contentPane.setBackground(new Color(59,59,59));
         
-        //add(optionsPanel);
-    }
-
-    public void newLevelPrompter() {
-        String wonGameMessage = "Looks like you want to skip to the next level!";
-        JOptionPane wonGame = new JOptionPane();
-        wonGame.showInternalMessageDialog(this.getContentPane(), wonGameMessage, "Next level!",
-                JOptionPane.WARNING_MESSAGE, null);
+        add(optionsPanel);
     }
 
     public void gameWonDialog() {

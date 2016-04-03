@@ -51,6 +51,10 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
             }
         } else if(e.getSource() == controller.view.mntmHighScore) { /** User has opened high score option **/
 
+        } else if(e.getSource() == controller.view.leftButton) {
+            System.out.println("left arrow clicked!");
+        } else if(e.getSource() == controller.view.rightButton) {
+            System.out.println("right arrow clicked!");
         }
 
         else if(e.getSource() == controller.view.mntmLevel1) { // user wants to change the level

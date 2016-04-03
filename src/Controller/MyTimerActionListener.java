@@ -12,6 +12,7 @@ public class MyTimerActionListener implements ActionListener {
     }
     public void actionPerformed(ActionEvent e) {
         controller.timerCounter++;
-        System.out.println(controller.timerCounter);
+        if(controller.view != null)
+            controller.view.time.setText(String.valueOf(controller.timerCounter +  " seconds"));
     }
 }

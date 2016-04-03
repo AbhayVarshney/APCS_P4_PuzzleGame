@@ -64,7 +64,7 @@ public class PGController {
         mouse = new MyMouseListener(this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
-        // intialize objects
+        // initialize objects
         addListeners();
     }
 
@@ -76,7 +76,7 @@ public class PGController {
             for (int i = 0; i < BOARDWIDTH; i++) {
                 for (int j = 0; j < BOARDHEIGHT; j++) {
                     String input =  scan.next();
-                    char key = model.BACKDROP;;                  // null--> backdrop
+                    char key = model.BACKDROP;;               // null--> backdrop
                     if(input.equals("rock.png")) {            // BLOCK
                         key = model.BLOCK;
                     } else if(input.equals("tree.png")) {     // CRATE
@@ -125,6 +125,10 @@ public class PGController {
         view.mntmLevel3.addActionListener(mouse);
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
+
+        // options panel
+        view.leftButton.addActionListener(mouse);
+        view.rightButton.addActionListener(mouse);
     }
 
     // setter method
