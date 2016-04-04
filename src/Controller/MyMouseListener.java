@@ -20,6 +20,9 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
         if(e.getSource() == controller.view.mntmNewGame) { /** user wants to play new game **/
             // don't change the level. simply restart the game
             controller.restartGame(false);
+        } else if(e.getSource() == controller.view.mntmHighScore){ /** user wants to open highscores **/
+        	controller.view.openHighScores();
+        	controller.view.requestFocus();
         } else if(e.getSource() == controller.view.mntmExit) { /** user wants to exit the game **/
             controller.timer.stop();
             controller.view.dispose();

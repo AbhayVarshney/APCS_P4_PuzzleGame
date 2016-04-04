@@ -5,6 +5,7 @@ import View.PGView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.Timer;
 
@@ -38,6 +39,9 @@ public class PGController {
     public final String LEVEL_4;
     public final String LEVEL_5;
 
+    /** HIGHSCORES **/
+    public ArrayList <String> scoreBoard; //storing best scores
+    
     public PGController() {
         flagCounter = 0;
         userLevel = 1;
@@ -46,6 +50,8 @@ public class PGController {
         BOARDWIDTH = 11;
         BOARDHEIGHT = 19;
 
+        scoreBoard = new ArrayList<String>();
+        
         /** INITIALIZING LEVELS **/
         LEVEL_1 = "src/Controller/Levels/Level1_Sokoban.txt";
         LEVEL_2 = "src/Controller/Levels/Level2_Sokoban.txt";
@@ -183,6 +189,18 @@ public class PGController {
     /** IF THE USER HAS WON THE GAME, THIS METHOD SHOULD RUN **/
     public void updateGameStatus() {
         if(model.gameOver) {
+        	//scoreBoard.add()
+        	if(userLevel == 1){
+        		scoreBoard.add("Level 1: " + view.time.getText());
+        	}else if(userLevel == 2){
+        		scoreBoard.add("Level 2: " + view.time.getText());
+        	}else if(userLevel == 3){
+        		scoreBoard.add("Level 3: " + view.time.getText());
+        	}else if(userLevel == 4){
+        		scoreBoard.add("Level 4: " + view.time.getText());
+        	}else if(userLevel == 5){
+        		scoreBoard.add("Level 5: " + view.time.getText());
+        	}
             view.gameWonDialog();
             restartGame(true);
         }

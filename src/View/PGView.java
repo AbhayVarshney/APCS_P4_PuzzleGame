@@ -164,8 +164,6 @@ public class PGView extends JFrame {
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));
             logo = ImageIO.read(new File("images/logo.png"));
-            leftArrow = ImageIO.read(new File("images/left_arrow.png"));
-            rightArrow = ImageIO.read(new File("images/right_arrow.png"));
         } catch (IOException e) {
             System.out.println("Images can't be found. " + e.getMessage());
             e.printStackTrace();
@@ -187,35 +185,10 @@ public class PGView extends JFrame {
         optionsPanel.setMaximumSize(new Dimension(WINDOW_WIDTH, 18000));
         optionsPanel.setBackground(new Color(59, 59, 59));
 
-        /** LEFT ARROW **/
-        leftButton = new JButton(){
-        	@Override
-        	public void paintComponent(Graphics g){
-        		super.paintComponent(g);
-        		g.drawImage(leftArrow, -3, -2, 25, 25, null);
-        	}
-        };
-        leftButton.setPreferredSize(new Dimension(20, 20));
-        leftButton.setBorder(new LineBorder(Color.WHITE, 1));
-
         /** MOVES LABEL/# **/
         movesCount = new JLabel();
         movesCount.setForeground(Color.WHITE);
         movesCount.setText("0");
-
-        /** RIGHT ARROW **/
-        rightButton = new JButton(){
-        	@Override
-        	public void paintComponent(Graphics g){
-        		super.paintComponent(g);
-        		g.drawImage(rightArrow, -3, -2, 25, 25, null);
-        	}
-        };
-
-        rightButton.setOpaque(true);
-        rightButton.setBackground(new Color(42, 42, 42));
-        rightButton.setPreferredSize(new Dimension(20, 20));
-        rightButton.setBorder(new LineBorder(Color.WHITE, 1));
 
         /** MOVES Text **/
         moves = new JLabel(); //Text for moves
@@ -241,9 +214,7 @@ public class PGView extends JFrame {
 
         /** ADDING OBJECTS TO MOVES PANEL **/
         movesPanel.add(moves);
-        movesPanel.add(leftButton);
         movesPanel.add(movesCount);
-        movesPanel.add(rightButton);
 
         /** ADDING OBJECTS TO TIME PANEL **/
         timePanel.add(timeText);
@@ -279,6 +250,17 @@ public class PGView extends JFrame {
                 JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
         if(response != 0) this.dispose(); // quit
 
+    }
+    
+    public void openHighScores(){
+    	String highScoresText = "";
+    	for(int i = 0; i < controller.scoreBoard.size(); i++){
+    		highScoresText += controller.scoreBoard.get(i) + "\n";
+    	}
+    	JOptionPane high = new JOptionPane();
+        int response = high.showInternalConfirmDialog(this.getContentPane(), highScoresText, "High Scores",
+                JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
+       
     }
 
     public void updateBoardContent(char[][] board) {
