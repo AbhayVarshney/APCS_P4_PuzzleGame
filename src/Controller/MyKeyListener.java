@@ -15,7 +15,6 @@ public class MyKeyListener extends KeyAdapter {
         int myX = controller.getXValue(controller.model.SPRITE); /** SAVE INDEX POSITION X of SPRITE. **/
         int myY = controller.getYValue(controller.model.SPRITE); /** SAVE INDEX POSITION Y of SPRITE. **/
 
-        System.out.println("test");
         int newMyX = myX;
         int newMyY = myY;
         if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { newMyY++; }
