@@ -1,6 +1,7 @@
 package View;
 
 
+import Controller.HighScores;
 import Controller.PGController;
 
 import javax.imageio.ImageIO;
