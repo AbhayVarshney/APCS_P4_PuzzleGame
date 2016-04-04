@@ -39,7 +39,7 @@ public class PGController {
     public final String LEVEL_5;
 
     /** HIGHSCORES **/
-    public ArrayList <String> scoreBoard; //storing best scores
+    public ArrayList <HighScores> scoreBoard; //storing best scores
     
     public PGController() {
         flagCounter = 0;
@@ -48,7 +48,7 @@ public class PGController {
         BOARDWIDTH = 11;
         BOARDHEIGHT = 19;
 
-        scoreBoard = new ArrayList<String>();
+        scoreBoard = new ArrayList<HighScores>();
         
         /** INITIALIZING LEVELS **/
         LEVEL_1 = "src/Controller/Levels/Level1_Sokoban.txt";
@@ -130,9 +130,6 @@ public class PGController {
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
 
-        // options panel
-        view.leftButton.addActionListener(mouse);
-        view.rightButton.addActionListener(mouse);
     }
 
     // setter method
@@ -186,20 +183,31 @@ public class PGController {
 
     /** IF THE USER HAS WON THE GAME, THIS METHOD SHOULD RUN **/
     public void updateGameStatus() {
+    	
         if(model.gameOver) {
-        	//scoreBoard.add()
+        	String output = "";
         	if(userLevel == 1){
-        		scoreBoard.add("Level 1: " + view.time.getText());
+        		//scoreBoard.add("Level 1: " + view.time.getText());
+        		output = "Level 1: " + view.time.getText();
+        		scoreBoard.add(new HighScores((int)timerCounter, output));
         	}else if(userLevel == 2){
-        		scoreBoard.add("Level 2: " + view.time.getText());
+        		//scoreBoard.add("Level 2: " + view.time.getText());
+        		output = "Level 2: " + view.time.getText();
+        		scoreBoard.add(new HighScores((int)timerCounter, output));
         	}else if(userLevel == 3){
-        		scoreBoard.add("Level 3: " + view.time.getText());
+        		//scoreBoard.add("Level 3: " + view.time.getText());
+        		output = "Level 3: " + view.time.getText();
+        		scoreBoard.add(new HighScores((int)timerCounter, output));
         	}else if(userLevel == 4){
-        		scoreBoard.add("Level 4: " + view.time.getText());
+        		//scoreBoard.add("Level 4: " + view.time.getText());
+        		output = "Level 4: " + view.time.getText();
+        		scoreBoard.add(new HighScores((int)timerCounter, output));
         	}else if(userLevel == 5){
-        		scoreBoard.add("Level 5: " + view.time.getText());
+        		//scoreBoard.add("Level 5: " + view.time.getText());
+        		output = "Level 5: " + view.time.getText();
+        		scoreBoard.add(new HighScores((int)timerCounter, output));
         	}
-            
+
             view.gameWonDialog();
             model.gameOver = false;
             restartGame(true);

@@ -1,5 +1,6 @@
 package View;
 
+import Controller.HighScores;
 import Controller.MyKeyListener;
 import Controller.PGController;
 
@@ -254,8 +255,25 @@ public class PGView extends JFrame {
     
     public void openHighScores(){
     	String highScoresText = "";
+    	
+    	for(int i = controller.scoreBoard.size()-1; i >=0 ; i--) {
+    		for(int j = 0; j < i; j++) {
+    			if(controller.scoreBoard.get(j).getScore() > controller.scoreBoard.get(j+1).getScore()){
+    				int tempNum1 = controller.scoreBoard.get(j).getScore();
+    				String tempText1 = controller.scoreBoard.get(j).getText();
+    				
+    				int tempNum2 = controller.scoreBoard.get(j+1).getScore();
+    				String tempText2 = controller.scoreBoard.get(j+1).getText();
+    				
+    				//HighScores temp = controller.scoreBoard.get(j).getScore(), controller.scoreBoard.get(j).getText();
+    				controller.scoreBoard.set(j, new HighScores(tempNum2, tempText2));
+    				controller.scoreBoard.set(j+1, new HighScores(tempNum1, tempText1));
+    			}
+    		}
+    	}
+    	 
     	for(int i = 0; i < controller.scoreBoard.size(); i++){
-    		highScoresText += controller.scoreBoard.get(i) + "\n";
+    		highScoresText += controller.scoreBoard.get(i).getText() + "\n";
     	}
     	JOptionPane high = new JOptionPane();
         int response = high.showInternalConfirmDialog(this.getContentPane(), highScoresText, "High Scores",
