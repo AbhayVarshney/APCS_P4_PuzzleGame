@@ -20,7 +20,6 @@ public class PGController {
     public long timerCounter;
 
     /** GAME STATUS **/
-    boolean gameOver;
     String gameType;
 
     /** Board Size **/
@@ -46,7 +45,6 @@ public class PGController {
         flagCounter = 0;
         userLevel = 1;
 
-        gameOver = false;
         BOARDWIDTH = 11;
         BOARDHEIGHT = 19;
 
@@ -189,6 +187,7 @@ public class PGController {
     /** IF THE USER HAS WON THE GAME, THIS METHOD SHOULD RUN **/
     public void updateGameStatus() {
         if(model.gameOver) {
+<<<<<<< HEAD
         	//scoreBoard.add()
         	if(userLevel == 1){
         		scoreBoard.add("Level 1: " + view.time.getText());
@@ -201,7 +200,11 @@ public class PGController {
         	}else if(userLevel == 5){
         		scoreBoard.add("Level 5: " + view.time.getText());
         	}
+=======
+            System.out.print("Game Status: " + model.gameOver);
+>>>>>>> 1434607106e0d4c6290248ebd0c1100eb30f654f
             view.gameWonDialog();
+            model.gameOver = false;
             restartGame(true);
         }
     }
