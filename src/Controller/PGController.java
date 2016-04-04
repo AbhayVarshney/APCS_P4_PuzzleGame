@@ -133,10 +133,7 @@ public class PGController {
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
 
-<<<<<<< HEAD
-=======
-        // options panel
->>>>>>> f8afae4df654c4fef040144e5d97e53dec0f62b2
+
     }
 
     // setter method
