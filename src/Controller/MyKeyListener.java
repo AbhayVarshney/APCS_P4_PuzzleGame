@@ -29,7 +29,8 @@ public class MyKeyListener extends KeyAdapter {
         else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { 
         	newMyY--; 
         	controller.model.increaseMove();
-        	char[][] board = controller.boardContent;
+        	char[][] board = new char[(controller.model.moveHistory.get(0)).length][(controller.model.moveHistory.get(0))[0].length];
+        	System.arraycopy(board, 0, controller.model.moveHistory.get(0), 0, board.length);
         	controller.model.addBoard(board);
         	controller.model.print(controller.model.moveHistory);
         }
