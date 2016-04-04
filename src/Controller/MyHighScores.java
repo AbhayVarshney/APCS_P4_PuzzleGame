@@ -1,10 +1,10 @@
 package Controller;
 
-public class HighScores {
+public class MyHighScores {
 	private String text;
 	private int score;
 	
-	public HighScores(int score, String text){
+	public MyHighScores(int score, String text){
 		this.score = score;
 		this.text = text;
 	}

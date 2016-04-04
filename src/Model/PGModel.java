@@ -3,8 +3,6 @@ package Model;
 import Controller.PGController;
 
 public class PGModel {
-    char[][] boardBackground;   /** BEHIND THE SCENE BOARD **/
-
     public boolean gameOver;
     private int crateCounter;
     private int flagCounter;
@@ -22,9 +20,6 @@ public class PGModel {
     /** 2d array w/ positions of victory tile**/
     public CoordinatePoint[] victoryTilesPositions;
 
-    int[] x = {-1, -1, -1, 1, 1,  1, 0,  0};
-    int[] y = { 0, -1,  1, 1, 0, -1, 1, -1};
-
     public PGModel(PGController controller) {
         BLOCK = 'b';         // gray.tile.gif
         CRATE = 'c';         // crate_tile.gif
@@ -36,10 +31,6 @@ public class PGModel {
 
         gameOver = false;
         this.controller = controller;
-    }
-
-    private void createBoard() {
-        boardBackground = new char[18][10];
     }
 
     public void updateEndZone() {
@@ -98,9 +89,6 @@ public class PGModel {
             // move to the next level
             gameOver = true;
         }
-
         controller.updateGameStatus();
     }
-    
-    
 }

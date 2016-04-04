@@ -13,7 +13,7 @@ public class Board extends JPanel {
         this.view = view;
         this.cellSize = cellSize;
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,6 +42,5 @@ public class Board extends JPanel {
                 g2.setColor(Color.BLACK);
             }
         }
-        
     }
 }

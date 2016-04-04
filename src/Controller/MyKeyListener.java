@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class MyKeyListener extends KeyAdapter {
+
     PGController controller;
 
     MyKeyListener(PGController controller) {

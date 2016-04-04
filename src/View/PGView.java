@@ -1,9 +1,7 @@
 package View;
 
-
-import Controller.HighScores;
+import Controller.MyHighScores;
 import Controller.PGController;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class PGView extends JFrame {
-    public PGController controller;
-
     /** MENUBAR **/
     public JFrame panel;
     public JPanel contentPane;
@@ -29,7 +25,6 @@ public class PGView extends JFrame {
     public JMenuItem mntmLevel3;
     public JMenuItem mntmLevel4;
     public JMenuItem mntmLevel5;
-    
     public JMenu mnHelp;
 
     /** WINDOW **/
@@ -49,29 +44,21 @@ public class PGView extends JFrame {
     public BufferedImage victory_tile;
     public BufferedImage userSprite;
     public BufferedImage logo;
-    public BufferedImage leftArrow;
-    public BufferedImage rightArrow;
     private int cellSize;
 
     /** OBJECTS **/
     public Board board;
     public Logo topLogo;
+    public PGController controller;
 
     /** BOARD IMPORTANT **/
     public char[][] boardContent;
 
     /** OPTIONS PANEL **/
-    public JButton leftButton;
-    public JButton rightButton;
     public JLabel timeText;
     public JLabel time;
     
-    // Default constructor
-    public PGView() {
-        WINDOW_WIDTH = 1500;
-        WINDOW_HEIGHT = 1250;
-    }
-
+    // Constructor
     public PGView(char[][] board, PGController controller) {
         this.controller = controller;
         this.boardContent = new char[board.length][board[0].length];
@@ -98,7 +85,6 @@ public class PGView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.getContentPane().setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-        //this.getContentP
     }
 
     private void loadMenuBar() {
@@ -146,13 +132,8 @@ public class PGView extends JFrame {
         JMenuItem menuItem_1 = new JMenuItem("");
         menuBar.add(menuItem_1);
         
-
-        
         JMenuItem menuItem = new JMenuItem("");
-        //panel.setLayout(new BorderLayout());
-        //panel.setPreferredSize(new Dimension(800, 850));
         menuBar.add(menuItem);
-        
     }
 
     private void loadImages() {
@@ -241,7 +222,7 @@ public class PGView extends JFrame {
         setFocusable(true);
     }
 
-    public void gameWonDialog() {
+    public void gameWonDialog() { // once user wins game, then this dialog should show up
         controller.timer.stop();
         String wonGameMessage = "Congrats! You beat the game \nin " + controller.timerCounter +
                                 "seconds! Would you \n like to move to the next level?";
@@ -249,12 +230,12 @@ public class PGView extends JFrame {
         int response = wonGame.showInternalConfirmDialog(this.getContentPane(), wonGameMessage, "You win!",
                 JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
         if(response != 0) this.dispose(); // quit
-
     }
     
     public void openHighScores(){
     	String highScoresText = "";
-    	
+
+        /** SWAP HIGH SCORES IN ASCENDING ORDER **/
     	for(int i = controller.scoreBoard.size()-1; i >=0 ; i--) {
     		for(int j = 0; j < i; j++) {
     			if(controller.scoreBoard.get(j).getScore() > controller.scoreBoard.get(j+1).getScore()){
@@ -263,19 +244,20 @@ public class PGView extends JFrame {
     				
     				int tempNum2 = controller.scoreBoard.get(j+1).getScore();
     				String tempText2 = controller.scoreBoard.get(j+1).getText();
-    				
-    				//HighScores temp = controller.scoreBoard.get(j).getScore(), controller.scoreBoard.get(j).getText();
-    				controller.scoreBoard.set(j, new HighScores(tempNum2, tempText2));
-    				controller.scoreBoard.set(j+1, new HighScores(tempNum1, tempText1));
+
+    				controller.scoreBoard.set(j, new MyHighScores(tempNum2, tempText2));
+    				controller.scoreBoard.set(j+1, new MyHighScores(tempNum1, tempText1));
     			}
     		}
     	}
-    	 
+
+        /** WHAT THE USER WILL SEE IN THE HIGH SCORE POPUP **/
     	for(int i = 0; i < controller.scoreBoard.size(); i++){
     		highScoresText += controller.scoreBoard.get(i).getText() + "\n";
     	}
+
     	JOptionPane high = new JOptionPane();
-        int response = high.showInternalConfirmDialog(this.getContentPane(), highScoresText, "High Scores",
+        high.showInternalConfirmDialog(this.getContentPane(), highScoresText, "High Scores",
                 JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
        
     }

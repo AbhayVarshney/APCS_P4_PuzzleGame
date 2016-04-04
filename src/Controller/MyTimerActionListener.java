@@ -10,6 +10,7 @@ public class MyTimerActionListener implements ActionListener {
     MyTimerActionListener(PGController controller) {
         this.controller = controller;
     }
+
     public void actionPerformed(ActionEvent e) {
         controller.timerCounter++;
         if(controller.view != null)

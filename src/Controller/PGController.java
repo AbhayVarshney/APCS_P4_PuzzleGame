@@ -39,19 +39,19 @@ public class PGController {
     public final String LEVEL_4;
     public final String LEVEL_5;
 
-    /** HIGHSCORES **/
-    public ArrayList <HighScores> scoreBoard; //storing best scores
+    /** HIGH SCORES **/
+    public ArrayList <MyHighScores> scoreBoard; //storing best scores ascending order
     
     public PGController() {
         flagCounter = 0;
         moveCounter = 0;
         
-        userLevel = 1;
+        userLevel = 1; // user's current level
 
-        BOARDWIDTH = 11;
-        BOARDHEIGHT = 19;
+        BOARDWIDTH = 11;  // size of board that code will read
+        BOARDHEIGHT = 19; // size of board that code will read
 
-        scoreBoard = new ArrayList<HighScores>();
+        scoreBoard = new ArrayList<>();
         
         /** INITIALIZING LEVELS **/
         LEVEL_1 = "src/Controller/Levels/Level1_Sokoban.txt";
@@ -66,12 +66,14 @@ public class PGController {
         timer.start();
 
         setGameType(LEVEL_1); // default level
+
+        /** INITIALIZING OBJECTS **/
         model = new PGModel(this);
         view = new PGView(readFile(), this);
         mouse = new MyMouseListener(this);
         keyListener = new MyKeyListener(this);
         view.addKeyListener(keyListener);
-        // initialize objects
+
         addListeners();
     }
 
@@ -104,21 +106,7 @@ public class PGController {
             e.getStackTrace();
         }
 
-        printBoard();
         return boardContent;
-    }
-
-    // temporary. testing purposes
-    public void printBoard() {
-        /** READING 2D ARRAY PURPOSES **/
-        for (int i = 0; i < BOARDWIDTH; i++) {
-            for (int j = 0; j < BOARDHEIGHT; j++) {
-                System.out.print(boardContent[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println();
     }
 
     void addListeners() {
@@ -132,8 +120,6 @@ public class PGController {
         view.mntmLevel3.addActionListener(mouse);
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
-
-
     }
 
     // setter method
@@ -142,11 +128,10 @@ public class PGController {
     }
     void setContent(int posX, int posY, char element) {
         boardContent[posX][posY] = element;
-        //model.updateBoard();
     }
 
     // getter method
-    int getXValue(char element) {
+    int getXValue(char element) { // get x position of boardContent
         for (int i = 0; i < boardContent.length; i++) {
             for (int j = 0; j < boardContent[0].length; j++) {
                 if(boardContent[i][j] == element) {
@@ -157,7 +142,7 @@ public class PGController {
         return -1; // no position found... shouldn't get to here
     }
 
-    public int getYValue(char element) {
+    public int getYValue(char element) { // get y position of boardContent
         for (int i = 0; i < boardContent.length; i++) {
             for (int j = 0; j < boardContent[0].length; j++) {
                 if(boardContent[i][j] == element) {
@@ -177,39 +162,30 @@ public class PGController {
         view.board.repaint();
     }
 
-    public void updateBoard(char[][] board) {
-        for (int i = 0; i < boardContent.length; i++) {
-            for (int j = 0; j < boardContent[0].length; j++) {
-                boardContent[i][j] = board[i][j];
-            }
-        }
-    }
-
     /** IF THE USER HAS WON THE GAME, THIS METHOD SHOULD RUN **/
     public void updateGameStatus() {
-    	
         if(model.gameOver) {
         	String output = "";
         	if(userLevel == 1){
         		//scoreBoard.add("Level 1: " + view.time.getText());
         		output = "Level 1: " + view.time.getText();
-        		scoreBoard.add(new HighScores((int)timerCounter, output));
+        		scoreBoard.add(new MyHighScores((int)timerCounter, output));
         	}else if(userLevel == 2){
         		//scoreBoard.add("Level 2: " + view.time.getText());
         		output = "Level 2: " + view.time.getText();
-        		scoreBoard.add(new HighScores((int)timerCounter, output));
+        		scoreBoard.add(new MyHighScores((int)timerCounter, output));
         	}else if(userLevel == 3){
         		//scoreBoard.add("Level 3: " + view.time.getText());
         		output = "Level 3: " + view.time.getText();
-        		scoreBoard.add(new HighScores((int)timerCounter, output));
+        		scoreBoard.add(new MyHighScores((int)timerCounter, output));
         	}else if(userLevel == 4){
         		//scoreBoard.add("Level 4: " + view.time.getText());
         		output = "Level 4: " + view.time.getText();
-        		scoreBoard.add(new HighScores((int)timerCounter, output));
+        		scoreBoard.add(new MyHighScores((int)timerCounter, output));
         	}else if(userLevel == 5){
         		//scoreBoard.add("Level 5: " + view.time.getText());
         		output = "Level 5: " + view.time.getText();
-        		scoreBoard.add(new HighScores((int)timerCounter, output));
+        		scoreBoard.add(new MyHighScores((int)timerCounter, output));
         	}
 
             view.gameWonDialog();
@@ -218,7 +194,7 @@ public class PGController {
         }
     }
 
-    /** RESPONSIBLE FOR MOVING TO THE NEXT LEVEL **/
+    /** RESPONSIBLE FOR MOVING USER TO THE NEXT LEVEL **/
     public void restartGame(boolean isNextLevel) {
         timer.stop();
         if(isNextLevel) {
@@ -240,7 +216,7 @@ public class PGController {
             }
         }
 
-        // restart time
+        // restart time & moves counter
         timerCounter = 0;
         moveCounter = 0;
         view.movesCount.setText("" + moveCounter);
@@ -248,6 +224,7 @@ public class PGController {
 
         view.updateBoardContent(readFile());
         model.locateVictoryTiles(boardContent);
+
         repaintBoard();
     }
 }

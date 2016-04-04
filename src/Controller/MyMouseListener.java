@@ -1,7 +1,5 @@
 package Controller;
 
-import View.PGView;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,9 +16,9 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
     }
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == controller.view.mntmNewGame) { /** user wants to play new game **/
-            // don't change the level. simply restart the game
+            // don't change the level. simply restart the game.
             controller.restartGame(false);
-        } else if(e.getSource() == controller.view.mntmHighScore){ /** user wants to open highscores **/
+        } else if(e.getSource() == controller.view.mntmHighScore){ /** user wants to open high scores **/
         	controller.view.openHighScores();
         	controller.view.requestFocus();
         } else if(e.getSource() == controller.view.mntmExit) { /** user wants to exit the game **/
@@ -52,14 +50,6 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
                 System.out.println("Error: " + b.getMessage());
                 b.getStackTrace();
             }
-        } else if(e.getSource() == controller.view.mntmHighScore) { /** User has opened high score option **/
-
-        } else if(e.getSource() == controller.view.leftButton) {
-            System.out.println("left arrow clicked!");
-            controller.view.requestFocus();
-        } else if(e.getSource() == controller.view.rightButton) {
-            System.out.println("right arrow clicked!");
-            controller.view.requestFocus();
         } else if(e.getSource() == controller.view.mntmLevel1) { // user wants to change the level
             controller.userLevel = 5;
             controller.restartGame(true);
