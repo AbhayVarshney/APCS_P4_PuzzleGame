@@ -1,12 +1,9 @@
 package View;
 
-import Controller.MyKeyListener;
 import Controller.PGController;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -243,8 +240,9 @@ public class PGView extends JFrame {
     }
 
     public void gameWonDialog() {
+        controller.timer.stop();
         String wonGameMessage = "Congrats! You beat the game \nin " + controller.timerCounter +
-                                "seconds! Would you \n like to move to the next game?";
+                                "seconds! Would you \n like to move to the next level?";
         JOptionPane wonGame = new JOptionPane();
         int response = wonGame.showInternalConfirmDialog(this.getContentPane(), wonGameMessage, "You win!",
                 JOptionPane.WARNING_MESSAGE, JOptionPane.OK_CANCEL_OPTION);
