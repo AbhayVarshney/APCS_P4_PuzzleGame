@@ -21,6 +21,7 @@ public class PGController {
 
     /** GAME STATUS **/
     String gameType;
+    public int moveCounter;
 
     /** Board Size **/
     final int BOARDWIDTH;
@@ -43,6 +44,8 @@ public class PGController {
     
     public PGController() {
         flagCounter = 0;
+        moveCounter = 0;
+        
         userLevel = 1;
 
         BOARDWIDTH = 11;
@@ -130,6 +133,10 @@ public class PGController {
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
 
+<<<<<<< HEAD
+=======
+        // options panel
+>>>>>>> f8afae4df654c4fef040144e5d97e53dec0f62b2
     }
 
     // setter method
@@ -238,6 +245,8 @@ public class PGController {
 
         // restart time
         timerCounter = 0;
+        moveCounter = 0;
+        view.movesCount.setText("" + moveCounter);
         timer.start();
 
         view.updateBoardContent(readFile());

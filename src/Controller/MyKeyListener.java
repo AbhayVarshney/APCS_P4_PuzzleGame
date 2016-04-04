@@ -17,11 +17,13 @@ public class MyKeyListener extends KeyAdapter {
 
         int newMyX = myX;
         int newMyY = myY;
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { newMyY++; }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { newMyY--; }
-        else if (e.getKeyCode() == KeyEvent.VK_UP )   { newMyX--; }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; }
-
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT)       { newMyY++; controller.moveCounter++;}
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) { newMyY--; controller.moveCounter++;}
+        else if (e.getKeyCode() == KeyEvent.VK_UP )   { newMyX--; controller.moveCounter++;}
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) { newMyX++; controller.moveCounter++;}
+       
+        controller.view.movesCount.setText("" + controller.moveCounter);
+        
         if(isEmpty(newMyX, newMyY)) { // safe to move
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
