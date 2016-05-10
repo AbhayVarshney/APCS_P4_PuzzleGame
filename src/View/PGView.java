@@ -19,12 +19,15 @@ public class PGView extends JFrame {
     public JMenuItem mntmNewGame;
     public JMenuItem mntmHighScore;
     public JMenuItem mntmExit;
-    public JMenu mnOption;
+    public JMenu mnLevel;
     public JMenuItem mntmLevel1;
     public JMenuItem mntmLevel2;
     public JMenuItem mntmLevel3;
     public JMenuItem mntmLevel4;
     public JMenuItem mntmLevel5;
+    public JMenu mntmMultiplayer;
+    public JMenuItem mntmLocal;
+    public JMenuItem mntmNetwork;
     public JMenu mnHelp;
 
     /** WINDOW **/
@@ -102,23 +105,28 @@ public class PGView extends JFrame {
         mntmExit = new JMenuItem("Exit");
         mnGame.add(mntmExit);
 
-        mnOption = new JMenu("Level");
-        menuBar.add(mnOption);
+        JMenu mnOptions = new JMenu("Options");
+        menuBar.add(mnOptions);
+
+        mnLevel = new JMenu("Level");
+        mnOptions.add(mnLevel);
 
         mntmLevel1 = new JMenuItem("Level 1");
-        mnOption.add(mntmLevel1);
+        mnLevel.add(mntmLevel1);
 
         mntmLevel2 = new JMenuItem("Level 2");
-        mnOption.add(mntmLevel2);
+        mnLevel.add(mntmLevel2);
 
         mntmLevel3 = new JMenuItem("Level 3");
-        mnOption.add(mntmLevel3);
+        mnLevel.add(mntmLevel3);
 
         mntmLevel4 = new JMenuItem("Level 4");
-        mnOption.add(mntmLevel4);
+        mnLevel.add(mntmLevel4);
 
         mntmLevel5 = new JMenuItem("Level 5");
-        mnOption.add(mntmLevel5);
+        mnLevel.add(mntmLevel5);
+
+        
 
         mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);
