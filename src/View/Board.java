@@ -14,6 +14,8 @@ public class Board extends JPanel {
         this.cellSize = cellSize;
     }
 
+    public void setCellSize(int cellSize) { this.cellSize = cellSize; }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

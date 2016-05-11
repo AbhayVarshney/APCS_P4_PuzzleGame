@@ -66,9 +66,52 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
             controller.userLevel = 4;
             controller.restartGame(true);
         } else if (e.getSource() == controller.view.mntmLocal) {  // user wants to play multiplayer option locally
-            System.out.println("local");
+            multiplayerBoard(true);
+            controller.isMultiplayer = true;
         } else if (e.getSource() == controller.view.mntmNetwork) { // user wants to play multiplayer option on network
-            System.out.println("network");
+            multiplayerBoard(false);
+            controller.isMultiplayer = true;
+        } else if (e.getSource() == controller.view.mntmSinglePlayerMode) { // user wants to play single player mode
+            singleplayerBoard();
         }
+    }
+
+    public void multiplayerBoard(boolean isLocal) {
+        // resize the board elements so that two maps can fit
+        int imageSize = 28; // smaller image size
+        int WINDOW_WIDTH = controller.view.getWINDOW_WIDTH() + (controller.view.getWINDOW_WIDTH()/2);
+        int WINDOW_HEIGHT = controller.view.getWINDOW_HEIGHT();
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
+        int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2 );
+        controller.view.setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        controller.view.setLocation(x,y);
+
+        // resize images
+        controller.view.board.setCellSize(imageSize);
+        controller.view.topLogo.setWidth(WINDOW_WIDTH);
+
+        controller.repaintBoard();
+        System.out.println("repainted!");
+    }
+
+    public void singleplayerBoard() {
+        // resize all board elements to the original size
+        int imageSize = 36; // original size!
+        int WINDOW_WIDTH = controller.view.getWINDOW_WIDTH();
+        int WINDOW_HEIGHT = controller.view.getWINDOW_HEIGHT();
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
+        int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2 );
+        controller.view.setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        controller.view.setLocation(x,y);
+
+        // resize images
+        controller.view.board.setCellSize(imageSize);
+        controller.view.topLogo.setWidth(WINDOW_WIDTH);
+
+        controller.repaintBoard();
     }
 }

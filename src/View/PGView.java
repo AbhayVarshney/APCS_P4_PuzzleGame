@@ -28,6 +28,7 @@ public class PGView extends JFrame {
     public JMenu mntmMultiplayer;
     public JMenuItem mntmLocal;
     public JMenuItem mntmNetwork;
+    public JMenuItem mntmSinglePlayerMode;
     public JMenu mnHelp;
 
     /** WINDOW **/
@@ -79,6 +80,14 @@ public class PGView extends JFrame {
         this.setVisible(true);
     }
 
+    public int getWINDOW_WIDTH() {
+        return WINDOW_WIDTH;
+    }
+
+    public int getWINDOW_HEIGHT() {
+        return WINDOW_HEIGHT;
+    }
+
     private void makeWindow(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
@@ -126,7 +135,17 @@ public class PGView extends JFrame {
         mntmLevel5 = new JMenuItem("Level 5");
         mnLevel.add(mntmLevel5);
 
-        
+        mntmMultiplayer = new JMenu("Multiplayer");
+        mnOptions.add(mntmMultiplayer);
+
+        mntmLocal = new JMenuItem("Local");
+        mntmMultiplayer.add(mntmLocal);
+
+        mntmNetwork = new JMenuItem("Network");
+        mntmMultiplayer.add(mntmNetwork);
+
+        mntmSinglePlayerMode = new JMenuItem("Single Player Mode");
+        mnOptions.add(mntmSinglePlayerMode);
 
         mnHelp = new JMenu("Help");
         menuBar.add(mnHelp);

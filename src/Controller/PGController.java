@@ -41,6 +41,9 @@ public class PGController {
 
     /** HIGH SCORES **/
     public ArrayList <MyHighScores> scoreBoard; //storing best scores ascending order
+
+    /** MULTIPLAYER **/
+    public boolean isMultiplayer;
     
     public PGController() {
         flagCounter = 0;
@@ -120,6 +123,9 @@ public class PGController {
         view.mntmLevel3.addActionListener(mouse);
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
+        view.mntmLocal.addActionListener(mouse);
+        view.mntmNetwork.addActionListener(mouse);
+        view.mntmSinglePlayerMode.addActionListener(mouse);
     }
 
     // setter method
@@ -160,6 +166,7 @@ public class PGController {
     public void repaintBoard() {
         view.updateBoardContent(boardContent);
         view.board.repaint();
+        view.topLogo.repaint();
     }
 
     /** IF THE USER HAS WON THE GAME, THIS METHOD SHOULD RUN **/

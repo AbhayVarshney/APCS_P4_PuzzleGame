@@ -25,10 +25,7 @@ public class MyKeyListener extends KeyAdapter {
        
         controller.view.movesCount.setText("" + controller.moveCounter);
         
-        if(isEmpty(newMyX, newMyY)) { // safe to move
-            controller.setContent(myX, myY, controller.model.EMPTY);
-            controller.setContent(newMyX, newMyY, controller.model.SPRITE);
-        } else if(isVictory(newMyX, newMyY)) {
+        if(isEmpty(newMyX, newMyY) || isVictory(newMyX, newMyY)) { // safe to move
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
         } else if((isCrate(newMyX, newMyY) || isCompletedCrate(newMyX, newMyY)) &&
@@ -37,7 +34,7 @@ public class MyKeyListener extends KeyAdapter {
             controller.setContent(newMyX + (newMyX - myX), newMyY + (newMyY - myY), controller.model.CRATE);
             controller.setContent(myX, myY, controller.model.EMPTY);
             controller.setContent(newMyX, newMyY, controller.model.SPRITE);
-        }
+        } else {} // user has hit the wall
 
         controller.model.updateEndZone();
         controller.model.updateVictoryCratesCounter();
