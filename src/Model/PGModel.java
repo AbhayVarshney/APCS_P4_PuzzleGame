@@ -2,6 +2,8 @@ package Model;
 
 import Controller.PGController;
 
+import java.util.ArrayList;
+
 public class PGModel {
     public boolean gameOver;
     private int crateCounter;
@@ -16,9 +18,14 @@ public class PGModel {
     public final char EMPTY;
     public final char VICTORY_TILE;
     public final char BACKDROP;
+    public final char PLAYER2;
+    public final char BOTH; // player1 and 2 are on same location
 
     /** 2d array w/ positions of victory tile**/
     public CoordinatePoint[] victoryTilesPositions;
+
+    /** previous moves history **/
+    public ArrayList<BoardHistory> boardHistory;
 
     public PGModel(PGController controller) {
         BLOCK = 'b';         // gray.tile.gif
@@ -28,6 +35,10 @@ public class PGModel {
         EMPTY = ' ';         // draw grey tile
         VICTORY_TILE = '.';  // victor_tile.gif
         BACKDROP = 'o';      // dark grey background
+        PLAYER2 = 'p';       // Player_2.png
+        BOTH = 'a';          // Both player 1 & 2 are on the same location
+
+        boardHistory = new ArrayList<BoardHistory>();
 
         gameOver = false;
         this.controller = controller;

@@ -1,23 +1,28 @@
 package Controller;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MyMouseListener extends MouseAdapter implements ActionListener {
     PGController controller;
+
     MyMouseListener(PGController controller) {
         this.controller = controller;
     }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == controller.view.mntmNewGame) { /** user wants to play new game **/
             // don't change the level. simply restart the game.
             controller.restartGame(false);
+            controller.isLocal = false;
         } else if (e.getSource() == controller.view.mntmHighScore) { /** user wants to open high scores **/
             controller.view.openHighScores();
             controller.view.requestFocus();
@@ -66,51 +71,89 @@ public class MyMouseListener extends MouseAdapter implements ActionListener {
             controller.userLevel = 4;
             controller.restartGame(true);
         } else if (e.getSource() == controller.view.mntmLocal) {  // user wants to play multiplayer option locally
-            multiplayerBoard(true);
-            controller.isMultiplayer = true;
-        } else if (e.getSource() == controller.view.mntmNetwork) { // user wants to play multiplayer option on network
-            multiplayerBoard(false);
-            controller.isMultiplayer = true;
+            controller.isLocal = true;
+            multiplayer();
         } else if (e.getSource() == controller.view.mntmSinglePlayerMode) { // user wants to play single player mode
-            singleplayerBoard();
+            controller.isLocal = false;
+            singlePlayer();
+        } else if (e.getSource() == controller.view.rightButton) { // user chooses to move right in move history
+            controller.view.requestFocus();
+
+            if(controller.moveCounter < controller.model.boardHistory.size()-1) {
+                controller.moveCounter++;
+                controller.view.movesCount.setText("" + controller.moveCounter);
+
+                // update the board
+                for (int i = 0; i < controller.model.boardHistory.get(controller.moveCounter).getBoardContent().length; i++) {
+                    for (int j = 0; j < controller.model.boardHistory.get(controller.moveCounter).getBoardContent()[0].length; j++) {
+                        controller.boardContent[i][j] = controller.model.boardHistory.get(controller.moveCounter).getBoardContent()[i][j];
+                    }
+                }
+                controller.repaintBoard();
+            }
+        } else if (e.getSource() == controller.view.leftButton) { // user chooses to move left in move history
+            controller.view.requestFocus();
+
+            if (controller.moveCounter > 0) { // precondition
+                controller.moveCounter--;
+                controller.view.movesCount.setText("" + controller.moveCounter);
+
+                // update the board
+                for (int i = 0; i < controller.model.boardHistory.get(controller.moveCounter).getBoardContent().length; i++) {
+                    for (int j = 0; j < controller.model.boardHistory.get(controller.moveCounter).getBoardContent()[0].length; j++) {
+                        controller.boardContent[i][j] = controller.model.boardHistory.get(controller.moveCounter).getBoardContent()[i][j];
+                    }
+                }
+                controller.repaintBoard();
+            }
         }
     }
 
-    public void multiplayerBoard(boolean isLocal) {
-        // resize the board elements so that two maps can fit
-        int imageSize = 28; // smaller image size
-        int WINDOW_WIDTH = controller.view.getWINDOW_WIDTH() + (controller.view.getWINDOW_WIDTH()/2);
-        int WINDOW_HEIGHT = controller.view.getWINDOW_HEIGHT();
+    public void multiplayer() {
+        try {
+            controller.view.player2 = ImageIO.read(new File("images/Player_2.png"));
 
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
-        int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2 );
-        controller.view.setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-        controller.view.setLocation(x,y);
+            /** CREATING A BIGGER WINDOW FOR MULTIPLAYER **/
+            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+            int WINDOW_WIDTH = 850;
+            int WINDOW_HEIGHT = 850;
+            int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
+            int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2 );
+            controller.view.setBounds(x, y, WINDOW_WIDTH, WINDOW_HEIGHT);
+            controller.view.board.setPreferredSize(new Dimension(700, 500));
 
-        // resize images
-        controller.view.board.setCellSize(imageSize);
-        controller.view.topLogo.setWidth(WINDOW_WIDTH);
+            controller.BOARDHEIGHT = 20;
+            controller.BOARDWIDTH = 20;
+            controller.view.board.cellSize = 25;
+            controller.userLevel = 6;
+            controller.setGameType(controller.MULTIPLAYER_1);
+            controller.restartGame(false);
+        } catch(IOException a) {
+            System.out.println("Images can't be found. " + a.getMessage());
+            a.printStackTrace();
+        }
 
         controller.repaintBoard();
-        System.out.println("repainted!");
     }
 
-    public void singleplayerBoard() {
-        // resize all board elements to the original size
-        int imageSize = 36; // original size!
-        int WINDOW_WIDTH = controller.view.getWINDOW_WIDTH();
-        int WINDOW_HEIGHT = controller.view.getWINDOW_HEIGHT();
-
+    public void singlePlayer() {
+        /** CREATING A SMALLER WINDOW FOR MULTIPLAYER **/
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int WINDOW_WIDTH = 850;
+        int WINDOW_HEIGHT = 750;
         int x = (int) ((dimension.getWidth() - WINDOW_WIDTH) / 2 );
         int y = (int) ((dimension.getHeight() - WINDOW_HEIGHT) / 2 );
-        controller.view.setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-        controller.view.setLocation(x,y);
+        controller.view.board.setPreferredSize(new Dimension(700, 400));
 
-        // resize images
-        controller.view.board.setCellSize(imageSize);
-        controller.view.topLogo.setWidth(WINDOW_WIDTH);
+        controller.view.setBounds(x, y, WINDOW_WIDTH, WINDOW_HEIGHT);
+        controller.userLevel = 1;
+        controller.BOARDHEIGHT = 19;
+        controller.BOARDWIDTH = 11;
+        controller.view.board.cellSize = 36;
+        controller.setGameType(controller.LEVEL_1);
+        controller.restartGame(false);
+
+        // go through 2d array and convert PLAYER2 or BOTH to EMPTY
 
         controller.repaintBoard();
     }

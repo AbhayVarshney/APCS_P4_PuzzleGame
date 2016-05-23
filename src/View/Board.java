@@ -7,14 +7,12 @@ public class Board extends JPanel {
     PGView view;
 
     /** BOARD **/
-    int cellSize;
+    public int cellSize;
 
     Board(PGView view, int cellSize) {
         this.view = view;
         this.cellSize = cellSize;
     }
-
-    public void setCellSize(int cellSize) { this.cellSize = cellSize; }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -37,6 +35,8 @@ public class Board extends JPanel {
                     g.drawImage(view.victory_tile, cellSize*j, cellSize*i, cellSize, cellSize, null);
                 } else if(view.boardContent[i][j] == view.controller.model.COMPLETED_CRATE) {
                     g.drawImage(view.completedCrate, cellSize*j, cellSize*i, cellSize, cellSize, null);
+                } else if(view.boardContent[i][j] == view.controller.model.PLAYER2) {
+                    g.drawImage(view.player2, cellSize*j, cellSize*i, cellSize, cellSize, null);
                 } else { // backdrop
                     g.setColor(new Color(59,59,59));
                     g.fillRect(cellSize*j, cellSize*i, cellSize, cellSize);

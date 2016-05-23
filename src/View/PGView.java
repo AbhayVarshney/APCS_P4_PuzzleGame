@@ -4,6 +4,7 @@ import Controller.MyHighScores;
 import Controller.PGController;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.applet.Applet;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,7 +28,6 @@ public class PGView extends JFrame {
     public JMenuItem mntmLevel5;
     public JMenu mntmMultiplayer;
     public JMenuItem mntmLocal;
-    public JMenuItem mntmNetwork;
     public JMenuItem mntmSinglePlayerMode;
     public JMenu mnHelp;
 
@@ -40,6 +40,8 @@ public class PGView extends JFrame {
     private JPanel logoSign;
     private JLabel moves;
     public JLabel movesCount;
+    public JButton leftButton;
+    public JButton rightButton;
 
     /** IMAGES **/
     public BufferedImage crate;
@@ -47,6 +49,7 @@ public class PGView extends JFrame {
     public BufferedImage wall;
     public BufferedImage victory_tile;
     public BufferedImage userSprite;
+    public BufferedImage player2;
     public BufferedImage logo;
     private int cellSize;
 
@@ -78,14 +81,6 @@ public class PGView extends JFrame {
         createGui();
         this.getContentPane().setBackground(new Color(59,59,59)); // set background of the ui to grey
         this.setVisible(true);
-    }
-
-    public int getWINDOW_WIDTH() {
-        return WINDOW_WIDTH;
-    }
-
-    public int getWINDOW_HEIGHT() {
-        return WINDOW_HEIGHT;
     }
 
     private void makeWindow(int WINDOW_WIDTH, int WINDOW_HEIGHT) {
@@ -141,9 +136,6 @@ public class PGView extends JFrame {
         mntmLocal = new JMenuItem("Local");
         mntmMultiplayer.add(mntmLocal);
 
-        mntmNetwork = new JMenuItem("Network");
-        mntmMultiplayer.add(mntmNetwork);
-
         mntmSinglePlayerMode = new JMenuItem("Single Player Mode");
         mnOptions.add(mntmSinglePlayerMode);
 
@@ -171,7 +163,8 @@ public class PGView extends JFrame {
             victory_tile = ImageIO.read(new File("images/victory_tile.gif"));
             userSprite = ImageIO.read(new File("images/Sprite.gif"));
             logo = ImageIO.read(new File("images/logo.png"));
-        } catch (IOException e) {
+            player2 = null;
+        } catch (Exception e) {
             System.out.println("Images can't be found. " + e.getMessage());
             e.printStackTrace();
         }
@@ -179,8 +172,8 @@ public class PGView extends JFrame {
 
     private void createGui() {
     	logoSign = new JPanel(); //top Panel
-    	logoSign.setMaximumSize(new Dimension(1091, 50));
-    	logoSign.setBackground(new Color(59,59,59));
+    	logoSign.setMaximumSize(new Dimension(1500, 50));
+    	logoSign.setBackground(new Color(42,42,42));
 
         /** TOP PART OF GUI **/
     	topLogo = new Logo(logo, WINDOW_WIDTH, 100);
@@ -203,6 +196,22 @@ public class PGView extends JFrame {
         moves.setText("Moves: ");
         moves.setBackground(new Color(59, 59, 59));
 
+        leftButton = new JButton("<");
+        leftButton.setPreferredSize(new Dimension(30,30));
+        leftButton.setBackground(Color.white);
+        leftButton.setForeground(Color.white);
+        leftButton.setOpaque(true);
+        leftButton.setContentAreaFilled(false);
+        leftButton.setBorder(null);
+
+        rightButton = new JButton(">");
+        rightButton.setPreferredSize(new Dimension(30,30));
+        rightButton.setBackground(Color.white);
+        rightButton.setForeground(Color.white);
+        rightButton.setOpaque(true);
+        rightButton.setContentAreaFilled(false);
+        rightButton.setBorder(null);
+
         JPanel movesPanel = new JPanel();
         movesPanel.setPreferredSize(new Dimension(10,-50));
         movesPanel.setBackground(new Color(59,59,59));
@@ -220,8 +229,10 @@ public class PGView extends JFrame {
         time.setText("0 seconds");
 
         /** ADDING OBJECTS TO MOVES PANEL **/
+        movesPanel.add(leftButton);
         movesPanel.add(moves);
         movesPanel.add(movesCount);
+        movesPanel.add(rightButton);
 
         /** ADDING OBJECTS TO TIME PANEL **/
         timePanel.add(timeText);

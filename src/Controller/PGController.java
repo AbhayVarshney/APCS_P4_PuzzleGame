@@ -6,6 +6,7 @@ import View.PGView;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import javax.swing.Timer;
 
@@ -24,8 +25,8 @@ public class PGController {
     public int moveCounter;
 
     /** Board Size **/
-    final int BOARDWIDTH;
-    final int BOARDHEIGHT;
+    public int BOARDWIDTH;
+    public int BOARDHEIGHT;
 
     /** BOARD IMPORTANT **/
     public int userLevel;
@@ -38,12 +39,13 @@ public class PGController {
     public final String LEVEL_3;
     public final String LEVEL_4;
     public final String LEVEL_5;
+    public final String MULTIPLAYER_1;
 
     /** HIGH SCORES **/
     public ArrayList <MyHighScores> scoreBoard; //storing best scores ascending order
 
     /** MULTIPLAYER **/
-    public boolean isMultiplayer;
+    public boolean isLocal;
     
     public PGController() {
         flagCounter = 0;
@@ -62,6 +64,7 @@ public class PGController {
         LEVEL_3 = "src/Controller/Levels/Level3_Sokoban.txt";
         LEVEL_4 = "src/Controller/Levels/Level4_Sokoban.txt";
         LEVEL_5 = "src/Controller/Levels/Level5_Sokoban.txt";
+        MULTIPLAYER_1 = "src/Controller/Levels/Multiplayer1_Sokoban.txt";
 
         /** INITIALIZING TIMER **/
         timer = new Timer(1000, new MyTimerActionListener(this));
@@ -100,6 +103,8 @@ public class PGController {
                         key = model.EMPTY;
                     } else if(input.equals("tree_big.png")) { // sprite
                         key = model.SPRITE;
+                    } else if(input.equals("second.png")) {   // second player
+                        key = model.PLAYER2;
                     }
                     boardContent[i][j] = key;
                 }
@@ -107,6 +112,8 @@ public class PGController {
         } catch(IOException e) {
             System.out.println("File not found: " + e.getMessage());
             e.getStackTrace();
+        } catch(NoSuchElementException e) {
+            System.out.println("No element found: " + e.getMessage());
         }
 
         return boardContent;
@@ -124,8 +131,9 @@ public class PGController {
         view.mntmLevel4.addActionListener(mouse);
         view.mntmLevel5.addActionListener(mouse);
         view.mntmLocal.addActionListener(mouse);
-        view.mntmNetwork.addActionListener(mouse);
         view.mntmSinglePlayerMode.addActionListener(mouse);
+        view.leftButton.addActionListener(mouse);
+        view.rightButton.addActionListener(mouse);
     }
 
     // setter method
@@ -177,24 +185,26 @@ public class PGController {
         		//scoreBoard.add("Level 1: " + view.time.getText());
         		output = "Level 1: " + view.time.getText();
         		scoreBoard.add(new MyHighScores((int)timerCounter, output));
-        	}else if(userLevel == 2){
+        	} else if(userLevel == 2){
         		//scoreBoard.add("Level 2: " + view.time.getText());
         		output = "Level 2: " + view.time.getText();
         		scoreBoard.add(new MyHighScores((int)timerCounter, output));
-        	}else if(userLevel == 3){
+        	} else if(userLevel == 3){
         		//scoreBoard.add("Level 3: " + view.time.getText());
         		output = "Level 3: " + view.time.getText();
         		scoreBoard.add(new MyHighScores((int)timerCounter, output));
-        	}else if(userLevel == 4){
-        		//scoreBoard.add("Level 4: " + view.time.getText());
+        	} else if(userLevel == 4){
+        	 	//scoreBoard.add("Level 4: " + view.time.getText());
         		output = "Level 4: " + view.time.getText();
         		scoreBoard.add(new MyHighScores((int)timerCounter, output));
-        	}else if(userLevel == 5){
+        	} else if(userLevel == 5){
         		//scoreBoard.add("Level 5: " + view.time.getText());
         		output = "Level 5: " + view.time.getText();
         		scoreBoard.add(new MyHighScores((int)timerCounter, output));
-        	}
-
+        	} else if(userLevel == 6) { // multiplayer option
+                output = "Multiplayer: " + view.time.getText();
+                scoreBoard.add(new MyHighScores((int) timerCounter, output));
+            }
             view.gameWonDialog();
             model.gameOver = false;
             restartGame(true);
@@ -217,7 +227,7 @@ public class PGController {
             } else if(userLevel == 4) {
                 setGameType(LEVEL_5);
                 userLevel++;
-            } else if(userLevel == 5) {
+            } else if(userLevel == 5 || userLevel == 6) { // 6 --> multiplayer
                 setGameType(LEVEL_1); // restart to level 1
                 userLevel = 1;
             }

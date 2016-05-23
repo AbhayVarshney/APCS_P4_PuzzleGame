@@ -13,6 +13,20 @@ import Controller.PGController;
  *             because we had a lot of components and logic to add.
  */
 
+
+/**
+ * APCS_P4_PuzzleGame Extension
+ * Name: Abhay Varshney
+ * Time Spent: ~2 hours
+ * Reflection: In this lab, I created an extension to my original project. The original project did not
+ *             have a move history options. So I added right and left arrow buttons (with the left button
+ *             only working), which allows the user to undo a move that they may have made. Also
+ *             I want to create a multi player options, and so I added that to the menu bar. And if
+ *             the user clicks on the multi player option, the screen enlarges. The user will be able
+ *             to use a-w-s-d to move around the map. I included a multiplayer level map in which the
+ *             players must communicate to properly solve the map!
+ */
+
 public class PGMain {
     public static void main(String[] args) { new PGController(); }
 }
